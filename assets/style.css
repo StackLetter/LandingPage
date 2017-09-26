@@ -1,4 +1,4 @@
-body{padding-top: 60px;font-size:16px;line-height: 1.5;}
+body{padding-top: 60px;padding-bottom: 100px;font-size:16px;line-height: 1.5;}
 
 .navbar-custom{color:#fff;background:linear-gradient(-45deg, hsl(193, 43%, 45%) 15%, hsl(232, 45%, 64%));border-bottom:1px solid rgba(255,255,255,.1);padding:5px 0}
 .navbar-custom .logo{float: left;height:32px;position: relative;top:-6px;margin-right: 10px;}
@@ -34,3 +34,4 @@ body{padding-top: 60px;font-size:16px;line-height: 1.5;}
 
 .lead .glyphicon{font-size: 1.4em;position: relative;top:-2px;vertical-align: middle;}
 .glyphicon-heart{color:#e75a60}
+.signup-form{margin:2em 0}
