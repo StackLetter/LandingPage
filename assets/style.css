@@ -22,6 +22,7 @@ body{padding-top: 60px;padding-bottom: 100px;font-size:16px;line-height: 1.5;}
 /**/
 
 .gray-block{background:#f1f1f1;padding:2em 0}
+.white-block{background:#fff;padding:2em 0}
 .overlap{background:#fff;border-radius:5px;box-shadow:0 1px 4px rgba(0,0,0,.1);max-width:800px;margin:-125px auto 0;padding:25px;overflow: auto;}
 
 .features{list-style: none;font-size: 22px;float: left;width: 50%;margin: 15px 0;}
@@ -30,8 +31,17 @@ body{padding-top: 60px;padding-bottom: 100px;font-size:16px;line-height: 1.5;}
 .features.pos .glyphicon{color:#418FA4}
 .features.neg .glyphicon{color:#e75a60}
 
-.sec-title{text-align: center;padding: 1em 0 .5em;font-weight: 300;}
+.sec-title{text-align: center;padding: .5em 0 .5em;font-weight: 300;}
 
 .lead .glyphicon{font-size: 1.4em;position: relative;top:-2px;vertical-align: middle;}
 .glyphicon-heart{color:#e75a60}
 .signup-form{margin:2em 0}
+
+
+.author{margin-top: 1em;}
+.author img{width: 120px;border-radius:50%;border:2px solid #bbb;float: left;}
+.author h3, .author p{margin-left: 135px;}
+.author h3{margin-top: 0;font-weight: 300;}
+.author p{font-size: .9em;}
+.author p.contact{line-height: 1.7;}
+.author p.contact .fa{width:25px;font-size: 1.4em;position: relative;top:2px}
