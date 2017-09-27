@@ -1,8 +1,7 @@
-body{padding-top: 60px;padding-bottom: 100px;font-size:16px;line-height: 1.5;}
+body{padding-top: 60px;font-size:16px;line-height: 1.5;}
 
 .navbar-custom{color:#fff;background:linear-gradient(-45deg, hsl(193, 43%, 45%) 15%, hsl(232, 45%, 64%));border-bottom:1px solid rgba(255,255,255,.1);padding:5px 0}
-.navbar-custom .logo{float: left;height:32px;position: relative;top:-6px;margin-right: 10px;}
-.navbar-custom a.navbar-brand{font-size: 20px;color:#fff;}
+.navbar-custom a.navbar-brand{font-size: 24px;color:#fff;}
 .navbar-custom .navbar-nav a{color:#fff}
 .navbar-custom .navbar-nav a:hover, .navbar-custom .navbar-nav a:focus{color:#fff;background:rgba(255,255,255,.1);border-radius:5px}
 
@@ -37,6 +36,12 @@ body{padding-top: 60px;padding-bottom: 100px;font-size:16px;line-height: 1.5;}
 .glyphicon-heart{color:#e75a60}
 .signup-form{margin:2em 0}
 
+.tip-wrapper{position: relative;}
+.tip-wrapper .tip{position: absolute;right: -10px;top:50%;margin-top: -8px}
+.tip{cursor:pointer}
+.tip:hover::after{z-index:10000;content:attr(data-title);display: block;position: absolute;left:20px;top:-10px;width:200px;background:rgba(0,0,0,.95);border-radius:5px;padding:5px 7px;color:#fff;font: 12px/1.2 "Helvetica Neue", Helvetica, Arial, sans-serif;}
+.btn + .tip{position: relative;top:2px;left:5px}
+
 
 .author{margin-top: 1em;padding-bottom: 2em;}
 .author img{width: 120px;border-radius:50%;border:2px solid #bbb;float: left;}
@@ -46,3 +51,9 @@ body{padding-top: 60px;padding-bottom: 100px;font-size:16px;line-height: 1.5;}
 .author p.contact{line-height: 1.7;}
 .author p.contact .fa{width:25px;font-size: 1.4em;position: relative;top:2px}
 .author p.contact a{color:#000}
+
+.faculty img{margin:0 20px;}
+
+.contact-form textarea{max-width:100%;min-width:100%;min-height: 80px;max-height: 200px}
+
+.footer .logo h2{font-weight: 300;}
