@@ -87,7 +87,9 @@ class HomepagePresenter extends UI\Presenter{
         $data = json_decode($res->getBody(), true);
         $access_token = $data['access_token'];
 
-        dump($access_token);
+        Debugger::barDump($access_token);
+        $this->flashMessage('Sign up successful.', 'success');
+        $this->redirect('default');
     }
 
 }
