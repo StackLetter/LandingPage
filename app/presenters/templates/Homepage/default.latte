@@ -53,18 +53,18 @@
         </div>
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <form action="#" method="get" class="form-horizontal signup-form">
+                <form n:name="signUpForm" class="form-horizontal signup-form">
                     <div class="form-group form-group-lg">
-                        <label for="signup-mail" class="col-sm-4 control-label">E-mail</label>
+                        <label n:name="mail" class="col-sm-4 control-label">E-mail</label>
                         <div class="col-sm-6 tip-wrapper">
-                            <input type="mail" class="form-control" id="signup-mail" name="mail" required>
+                            <input n:name="mail" class="form-control">
                             <span class="tip glyphicon glyphicon-question-sign" data-title="We will only use your address for delivering the newsletter. You can unsubscribe anytime."></span>
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
-                        <label for="signup-site" class="col-sm-4 control-label">Stack Exchange site</label>
+                        <label n:name="site" class="col-sm-4 control-label">Stack Exchange site</label>
                         <div class="col-sm-6 tip-wrapper">
-                            <select class="form-control" id="signup-site" name="site" required multiple>
+                            <select class="form-control" n:name="site">
                                 <option value="se">Software Engineering</option>
                                 <option value="math">Mathematics</option>
                             </select>
@@ -74,7 +74,7 @@
                     <div class="form-group form-group-lg">
                         <label class="col-sm-4 control-label"></label>
                         <div class="col-sm-6 tip-wrapper">
-                            <button type="submit" class="btn btn-lg btn-primary btn-block" disabled><span class="glyphicon glyphicon-ok"></span> Authorize & Sign up</button>
+                            <button n:name="send" class="btn btn-lg btn-primary btn-block"><span class="glyphicon glyphicon-ok"></span> Authorize & Sign up</button>
                             <span class="tip glyphicon glyphicon-question-sign" data-title="You will be asked to authorize StackLetter with your Stack Exchange profile. We use this to collect your user ID and access token for the API. We process only publicly available data."></span>
                         </div>
                     </div>
