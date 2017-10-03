@@ -14,6 +14,8 @@ use Tracy\Debugger;
  */
 class HomepagePresenter extends UI\Presenter{
 
+    const SESSION_KEY = 'se_api';
+
     public function getConfig(){
         return $this->context->getParameters();
     }
@@ -30,7 +32,7 @@ class HomepagePresenter extends UI\Presenter{
     }
 
     public function signUpFormSubmitted(UI\Form $form){
-        $values = (array) $form->values;
+        $values = (array)$form->values;
 
         // TODO check if email is in database
 
@@ -40,21 +42,26 @@ class HomepagePresenter extends UI\Presenter{
     private function constructOAuthUrl(){
         $api = $this->config['se_api'];
 
+        $session = $this->session->getSection(static::SESSION_KEY);
+        $session->setExpiration('10 minutes');
+        $session->token = bin2hex(random_bytes(64));
+
         $url = new Url($api['base_url']);
         $url->setQueryParameter('client_id', $api['client_id'])
             ->setQueryParameter('scope', $api['scope'])
-            ->setQueryParameter('redirect_uri', $this->link('//authorize'));
+            ->setQueryParameter('redirect_uri', $this->link('//authorize', ['token' => $session->token]));
         return $url;
     }
 
 
-    public function actionAuthorize($code){
-        $showError = function(){
+    public function actionAuthorize($token, $code){
+        $showError = function (){
             $this->flashMessage('Could not authorize the application. Please try again later.', 'danger');
             $this->redirect('default#signup');
         };
+        $session = $this->session->getSection(static::SESSION_KEY);
 
-        if(!$code){
+        if(($session->token !== null && $token !== $session->token) || !$code){
             $this->redirect('default');
         }
 
@@ -64,14 +71,14 @@ class HomepagePresenter extends UI\Presenter{
         $api = $this->config['se_api'];
         $http = new Client();
 
-        try {
+        try{
             $res = $http->request('POST', $api['token_url'], [
                 'form_params' => [
                     'client_id' => $api['client_id'],
                     'client_secret' => $api['client_secret'],
                     'code' => $code,
-                    'redirect_uri' => $this->link('//authorize')
-                ]
+                    'redirect_uri' => $this->link('//authorize'),
+                ],
             ]);
         } catch(ClientException $e){
             $showError();
