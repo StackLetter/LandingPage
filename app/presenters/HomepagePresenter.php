@@ -54,6 +54,10 @@ class HomepagePresenter extends UI\Presenter{
             $this->redirect('default#signup');
         };
 
+        if(!$code){
+            $this->redirect('default');
+        }
+
         if($this->getParameter('error') !== null){
             $showError();
         }
@@ -74,7 +78,9 @@ class HomepagePresenter extends UI\Presenter{
         }
 
         $data = json_decode($res->getBody(), true);
-        Debugger::barDump($data);
+        $access_token = $data['access_token'];
+
+
     }
 
 }
