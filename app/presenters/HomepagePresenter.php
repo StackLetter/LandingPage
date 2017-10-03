@@ -3,6 +3,7 @@
 namespace App\Presenters;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use Nette\Application\UI;
 use Nette\Http\Url;
 use Tracy\Debugger;
@@ -48,22 +49,30 @@ class HomepagePresenter extends UI\Presenter{
 
 
     public function actionAuthorize($code){
+        $showError = function(){
+            $this->flashMessage('Could not authorize the application. Please try again later.', 'danger');
+            $this->redirect('default#signup');
+        };
+
+        if($this->getParameter('error') !== null){
+            $showError();
+        }
         $api = $this->config['se_api'];
         $http = new Client();
 
-        $res = $http->request('POST', $api['token_url'], [
-            'form_params' => [
-                'client_id' => $api['client_id'],
-                'client_secret' => $api['client_secret'],
-                'code' => $code,
-                'redirect_uri' => $this->link('//authorize')
-            ]
-        ]);
-
-        if($res->getStatusCode() != 200){
-            $this->flashMessage('Could not authorize the application. Please try again later.', 'danger');
-            $this->redirect('default#signup');
+        try {
+            $res = $http->request('POST', $api['token_url'], [
+                'form_params' => [
+                    'client_id' => $api['client_id'],
+                    'client_secret' => $api['client_secret'],
+                    'code' => $code,
+                    'redirect_uri' => $this->link('//authorize')
+                ]
+            ]);
+        } catch(ClientException $e){
+            $showError();
         }
+
         $data = json_decode($res->getBody(), true);
         Debugger::barDump($data);
     }
