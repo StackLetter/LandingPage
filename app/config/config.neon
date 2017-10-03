@@ -13,3 +13,7 @@ session:
 
 services:
 	router: App\RouterFactory::createRouter
+
+
+extensions:
+	neevo: Neevo\Nette\Extension
