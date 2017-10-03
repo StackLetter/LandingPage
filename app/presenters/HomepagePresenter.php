@@ -44,7 +44,7 @@ class HomepagePresenter extends UI\Presenter{
 
         $session = $this->session->getSection(static::SESSION_KEY);
         $session->setExpiration('10 minutes');
-        $session->token = bin2hex(random_bytes(64));
+        $session->token = bin2hex(random_bytes(32));
 
         $url = new Url($api['base_url']);
         $url->setQueryParameter('client_id', $api['client_id'])
@@ -77,7 +77,7 @@ class HomepagePresenter extends UI\Presenter{
                     'client_id' => $api['client_id'],
                     'client_secret' => $api['client_secret'],
                     'code' => $code,
-                    'redirect_uri' => $this->link('//authorize'),
+                    'redirect_uri' => $this->link('//authorize', ['token' => $session->token]),
                 ],
             ]);
         } catch(ClientException $e){
