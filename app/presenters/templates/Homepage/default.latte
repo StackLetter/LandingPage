@@ -10,14 +10,14 @@
     <div class="container">
         <div class="overlap">
             <ul class="features pos">
-                <li><span class="glyphicon glyphicon-ok-circle"></span>Relevant newsletter sections</li>
-                <li><span class="glyphicon glyphicon-ok-circle"></span>Personalized questions</li>
-                <li><span class="glyphicon glyphicon-ok-circle"></span>Interesting site statistics</li>
+                <li><span class="fa fa-check-circle"></span>Relevant newsletter sections</li>
+                <li><span class="fa fa-check-circle"></span>Personalized questions</li>
+                <li><span class="fa fa-check-circle"></span>Interesting site statistics</li>
             </ul>
             <ul class="features neg">
-                <li><span class="glyphicon glyphicon-remove-circle"></span>No random questions</li>
-                <li><span class="glyphicon glyphicon-remove-circle"></span>No filter bubble</li>
-                <li><span class="glyphicon glyphicon-remove-circle"></span>No months old content</li>
+                <li><span class="fa fa-times-circle"></span>No random questions</li>
+                <li><span class="fa fa-times-circle"></span>No filter bubble</li>
+                <li><span class="fa fa-times-circle"></span>No months old content</li>
             </ul>
         </div>
 
@@ -47,42 +47,19 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <p class="lead text-center">
-                You will <span class="glyphicon glyphicon-heart"></span> our personalized version of the Stack Exchange Network newsletters.
+                You will <span class="fa fa-heart"></span> our personalized version of the Stack Exchange Network newsletters.
                 </p>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <form n:name="signUpForm" class="form-horizontal signup-form">
-                    <div class="form-group form-group-lg">
-                        <label n:name="mail" class="col-sm-4 control-label">E-mail</label>
-                        <div class="col-sm-6 tip-wrapper">
-                            <input n:name="mail" class="form-control">
-                            <span class="tip glyphicon glyphicon-question-sign" data-title="We will only use your address for delivering the newsletter. You can unsubscribe anytime."></span>
-                        </div>
-                    </div>
-                    <div class="form-group form-group-lg">
-                        <label n:name="site" class="col-sm-4 control-label">Stack Exchange site</label>
-                        <div class="col-sm-6 tip-wrapper">
-                            <select class="form-control" n:name="site">
-                                <option value="se">Software Engineering</option>
-                                <option value="math">Mathematics</option>
-                            </select>
-                            <span class="tip glyphicon glyphicon-question-sign" data-title="We only support a limited number of sites at the moment."></span>
-                        </div>
-                    </div>
-                    <div class="form-group form-group-lg">
-                        <label class="col-sm-4 control-label"></label>
-                        <div class="col-sm-6 tip-wrapper">
-                            <button n:name="send" class="btn btn-lg btn-primary btn-block"><span class="glyphicon glyphicon-ok"></span> Authorize & Sign up</button>
-                            <span class="tip glyphicon glyphicon-question-sign" data-title="You will be asked to authorize StackLetter with your Stack Exchange profile. We use this to collect your user ID and access token for the API. We process only publicly available data."></span>
-                        </div>
-                    </div>
-                    <div class="text-right">
-                    </div>
-                </form>
-            </div>
-        </div>
+        <ol class="signup-steps">
+            <li class="done">Authorize</li>
+            <li>Select sites</li>
+            <li>Done!</li>
+        </ol>
+
+        <p class="text-center">
+            <br><a n:href="authorize!" class="btn btn-lg btn-primary"><span class="fa fa-lock"></span> Authorize StackLetter</a>
+        </p>
     </div>
 </div>
 
