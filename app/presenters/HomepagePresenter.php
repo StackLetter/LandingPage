@@ -24,7 +24,7 @@ class HomepagePresenter extends UI\Presenter{
     /**
      * @var SessionSection
      */
-    private $session;
+    public $session;
 
     public function startup(){
         parent::startup();
