@@ -6,8 +6,8 @@ use App\Models\UserModel;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use Nette\Application\UI;
+use Nette\Http\SessionSection;
 use Nette\Http\Url;
-use Tracy\Debugger;
 
 
 /**
@@ -21,6 +21,14 @@ class HomepagePresenter extends UI\Presenter{
      */
     public $model;
 
+    /**
+     * @var SessionSection
+     */
+    private $session;
+
+    public function __construct(){
+        $this->session = $this->getSession()->getSection(static::class);
+    }
 
     public function getConfig(){
         return $this->context->getParameters();
