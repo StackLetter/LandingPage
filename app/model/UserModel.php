@@ -116,7 +116,7 @@ class UserModel{
     }
 
     private function getSiteUser($site, $token){
-        //try{
+        try{
             $res = $this->http->get('me', ['query' => [
                 'access_token' => $token,
                 'key' => $this->apiParams['key'],
@@ -124,9 +124,9 @@ class UserModel{
             ]]);
 
             return json_decode($res->getBody(), true)['items'][0];
-        //} catch(ClientException $e){
-        //    return false;
-        //}
+        } catch(ClientException $e){
+            return false;
+        }
     }
 
 }

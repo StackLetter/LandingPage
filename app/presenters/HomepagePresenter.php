@@ -87,7 +87,7 @@ class HomepagePresenter extends UI\Presenter{
         $data = json_decode($res->getBody(), true);
         $this->session->access_token = $data['access_token'];
 
-        $this->flashMessage('Sign up successful.', 'success');
+        $this->flashMessage('Stack Exchange authorization was successful.', 'success');
         $this->redirect('signup');
     }
 
@@ -125,6 +125,10 @@ class HomepagePresenter extends UI\Presenter{
         $account_id = $this->model->createAccount($values['mail'], $this->session->access_token);
         $this->model->createUsers($account_id, $values['site'], $this->session->access_token);
         $this->model->commitTransaction();
+
+        $this->flashMessage('Thank you for signing up!', 'success');
+        $this->session->registered = true;
+        $this->redirect('default');
     }
 
 

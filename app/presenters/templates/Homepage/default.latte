@@ -53,11 +53,15 @@
         </div>
         <ol class="signup-steps">
             <li class="done">Authorize</li>
-            <li>Select sites</li>
-            <li>Done!</li>
+            <li n:class="isset($presenter->session->registered) ? done">Select sites</li>
+            <li n:class="isset($presenter->session->registered) ? done">Done!</li>
         </ol>
 
-        <p class="text-center">
+        <p class="text-center lead" n:ifset="$presenter->session->registered">
+            <span class="fa fa-check-circle"></span> You're all done!
+        </p>
+
+        <p class="text-center" n:if="!isset($presenter->session->registered)">
             <br><a n:href="authorize!" class="btn btn-lg btn-primary"><span class="fa fa-lock"></span> Authorize StackLetter</a>
         </p>
     </div>
