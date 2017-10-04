@@ -128,7 +128,7 @@ class HomepagePresenter extends UI\Presenter{
 
         $this->flashMessage('Thank you for signing up!', 'success');
         $this->session->registered = true;
-        $this->redirect('default');
+        $this->redirect('default#signup');
     }
 
 
