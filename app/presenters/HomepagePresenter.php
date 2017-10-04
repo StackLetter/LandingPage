@@ -26,7 +26,8 @@ class HomepagePresenter extends UI\Presenter{
      */
     private $session;
 
-    public function __construct(){
+    public function startup(){
+        parent::startup();
         $this->session = $this->getSession()->getSection(static::class);
     }
 
