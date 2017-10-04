@@ -20,7 +20,7 @@
 		"nette/utils": "^2.4",
 		"latte/latte": "^2.4",
 		"tracy/tracy": "^2.4",
-		"smasty/Neevo": "^2.3",
+		"smasty/Neevo": "^2.3.3",
 		"smasty/neevo-nette-ext": "^1.2",
 		"guzzlehttp/guzzle": "^6.3"
 	},

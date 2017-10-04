@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6d0c3509d8dd142c5bea3c9c53524db8",
-    "content-hash": "0ac31e6a52219f35046964dfc2aab9c8",
+    "hash": "2bd6aa71ef683f834cb9823f33a56157",
+    "content-hash": "9ec6e5760c63bafee698f1a471ab0897",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -1381,16 +1381,16 @@
         },
         {
             "name": "smasty/neevo",
-            "version": "v2.3.2",
+            "version": "v2.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smasty/Neevo.git",
-                "reference": "42c7c5e67fd5d5a00d065d9341b6a5b6d193cbcb"
+                "reference": "3a1bf7e8ce24d453bb27dca3a9aca86852789f11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smasty/Neevo/zipball/42c7c5e67fd5d5a00d065d9341b6a5b6d193cbcb",
-                "reference": "42c7c5e67fd5d5a00d065d9341b6a5b6d193cbcb",
+                "url": "https://api.github.com/repos/smasty/Neevo/zipball/3a1bf7e8ce24d453bb27dca3a9aca86852789f11",
+                "reference": "3a1bf7e8ce24d453bb27dca3a9aca86852789f11",
                 "shasum": ""
             },
             "require": {
@@ -1425,7 +1425,7 @@
                 "database",
                 "dbal"
             ],
-            "time": "2013-04-09 20:55:51"
+            "time": "2017-10-04 21:51:13"
         },
         {
             "name": "smasty/neevo-nette-ext",
