@@ -111,7 +111,7 @@ class UserModel{
                 'is_employee' => $data['is_employee'],
                 'created_at' => new Literal('NOW()'),
                 'updated_at' => new Literal('NOW()'),
-            ]);
+            ])->run();
         }
     }
 
