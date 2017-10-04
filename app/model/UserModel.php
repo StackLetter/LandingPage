@@ -95,7 +95,7 @@ class UserModel{
             Debugger::barDump($data);
             $this->db->insert('users',[
                 'account_id' => $account_id,
-                'external_id' => $data['user_id'] ?? null,
+                'external_id' => $data['user_id'],
                 'age' => $data['age'] ?? null,
                 'reputation' => $data['reputation'],
                 'accept_rate' => $data['accept_rate'] ?? null,
@@ -123,7 +123,7 @@ class UserModel{
                 'site' => $site,
             ]]);
 
-            return json_decode($res->getBody(), true)['items'];
+            return json_decode($res->getBody(), true)['items'][0];
         //} catch(ClientException $e){
         //    return false;
         //}
