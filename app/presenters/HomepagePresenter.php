@@ -121,8 +121,10 @@ class HomepagePresenter extends UI\Presenter{
             return;
         }
 
+        $this->model->beginTransaction();
         $account_id = $this->model->createAccount($values['mail'], $this->session->token);
         $this->model->createUsers($account_id, $values['site'], $this->session->token);
+        $this->model->commitTransaction();
     }
 
 

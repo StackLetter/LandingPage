@@ -32,6 +32,19 @@ class UserModel{
     }
 
 
+    public function beginTransaction($savepoint = null){
+        return $this->db->begin($savepoint);
+    }
+
+    public function commitTransaction($savepoint = null){
+        return $this->db->commit($savepoint);
+    }
+
+    public function rollbackTransaction($savepoint = null){
+        return $this->db->rollback($savepoint);
+    }
+
+
     public function getByEmail($email){
         return $this->db->select('accounts')->where('email', $email)->fetch();
     }
@@ -75,6 +88,9 @@ class UserModel{
     public function createUsers($account_id, $sites, $token){
         foreach($sites as $site){
             $data = $this->getSiteUser($site, $token);
+            if(!$data){
+                continue;
+            }
             $this->db->insert('users',[
                 'account_id' => $account_id,
                 'external_id' => $data['user_id'],
