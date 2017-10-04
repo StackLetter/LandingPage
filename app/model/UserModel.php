@@ -9,6 +9,7 @@ use Neevo\Literal;
 use Neevo\Manager;
 use Nette;
 use Nette\Utils\DateTime;
+use Tracy\Debugger;
 
 class UserModel{
     use Nette\SmartObject;
@@ -91,9 +92,10 @@ class UserModel{
             if(!$data){
                 continue;
             }
+            Debugger::barDump($data);
             $this->db->insert('users',[
                 'account_id' => $account_id,
-                'external_id' => $data['user_id'],
+                'external_id' => $data['user_id'] ?? null,
                 'age' => $data['age'] ?? null,
                 'reputation' => $data['reputation'],
                 'accept_rate' => $data['accept_rate'] ?? null,
