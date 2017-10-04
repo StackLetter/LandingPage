@@ -5,8 +5,10 @@ namespace App\Models;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use Neevo\Literal;
 use Neevo\Manager;
 use Nette;
+use Nette\Utils\DateTime;
 
 class UserModel{
     use Nette\SmartObject;
@@ -39,7 +41,7 @@ class UserModel{
         return $this->db->insert('accounts', [
             'email' => $mail,
             'token' => $token
-        ])->run();
+        ])->insertId();
     }
 
 
@@ -64,6 +66,46 @@ class UserModel{
                 ->where('name', $sites)
                 ->fetchPairs('api', 'name');
 
+        } catch(ClientException $e){
+            return false;
+        }
+    }
+
+
+    public function createUsers($account_id, $sites, $token){
+        foreach($sites as $site){
+            $data = $this->getSiteUser($site, $token);
+            $this->db->insert('users',[
+                'account_id' => $account_id,
+                'external_id' => $data['user_id'],
+                'age' => $data['age'] ?? null,
+                'reputation' => $data['reputation'],
+                'accept_rate' => $data['accept_rate'] ?? null,
+                'reputation_change_month' => $data['reputation_change_month'],
+                'reputation_change_year' => $data['reputation_change_year'],
+                'reputation_change_week' => $data['reputation_change_week'],
+                'creation_date' => DateTime::from($data['creation_date']),
+                'last_access_date' => DateTime::from($data['last_access_date']),
+                'display_name' => $data['display_name'],
+                'user_type' => $data['user_type'],
+                'website_url' => $data['website_url'] ?? null,
+                'location' => $data['location'] ?? null,
+                'is_employee' => $data['is_employee'],
+                'created_at' => new Literal('NOW()'),
+                'updated_at' => new Literal('NOW()'),
+            ]);
+        }
+    }
+
+    private function getSiteUser($site, $token){
+        try{
+            $res = $this->http->get('me', ['query' => [
+                'access_token' => $token,
+                'key' => $this->apiParams['key'],
+                'site' => $site,
+            ]]);
+
+            return json_decode($res->getBody(), true)['items'];
         } catch(ClientException $e){
             return false;
         }

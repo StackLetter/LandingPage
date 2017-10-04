@@ -105,7 +105,7 @@ class HomepagePresenter extends UI\Presenter{
         $sites = $this->model->retrieveUserSites($this->session->access_token);
 
         $form->addEmail('mail', 'E-mail')->setRequired();
-        $form->addMultiSelect('site', 'Stack Exchange site', $sites)->setRequired();
+        $form->addMultiSelect('site', 'Stack Exchange sites', $sites)->setRequired();
         $form->addSubmit('send', 'Authorize & Sign up');
         $form->onSuccess[] = [$this, 'signUpFormSubmitted'];
 
@@ -121,7 +121,8 @@ class HomepagePresenter extends UI\Presenter{
             return;
         }
 
-        $this->model->createAccount($values['mail'], $this->session->token);
+        $account_id = $this->model->createAccount($values['mail'], $this->session->token);
+        $this->model->createUsers($account_id, $values['sites'], $this->session->token);
     }
 
 
