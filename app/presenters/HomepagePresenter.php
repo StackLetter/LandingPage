@@ -122,7 +122,7 @@ class HomepagePresenter extends UI\Presenter{
         }
 
         $account_id = $this->model->createAccount($values['mail'], $this->session->token);
-        $this->model->createUsers($account_id, $values['sites'], $this->session->token);
+        $this->model->createUsers($account_id, $values['site'], $this->session->token);
     }
 
 
