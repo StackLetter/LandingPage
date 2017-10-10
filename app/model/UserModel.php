@@ -26,10 +26,20 @@ class UserModel{
 
     private $apiParams;
 
-    public function __construct(array $params, Manager $db){
-        $this->apiParams = $params;
+    /**
+     * @var \Predis\Client
+     */
+    private $redis;
+
+    private $redisParams;
+
+
+    public function __construct(array $apiParams, array $redisParams, Manager $db){
+        $this->apiParams = $apiParams;
+        $this->redisParams = $redisParams;
         $this->db = $db;
         $this->http = new Client(['base_uri' => 'https://api.stackexchange.com/2.2/']);
+        $this->redis = new \Predis\Client($this->redisParams['uri']);
     }
 
 
@@ -84,6 +94,25 @@ class UserModel{
         } catch(ClientException $e){
             return false;
         }
+    }
+
+
+    public function scheduleUsers($account_id, $sites){
+        $this->redis->lpush($this->redisParams['job_queue'], [json_encode([
+            'job' => 'stackletter.user.download',
+            'params' => [
+                'account_id' => $account_id,
+                'sites' => $sites
+            ]
+        ])]);
+    }
+
+
+    public function scheduleWelcomeMail($account_id){
+        $this->redis->lpush($this->redisParams['job_queue'], [json_encode([
+            'job' => 'stackletter.mail.welcome',
+            'params' => ['account_id' => $account_id]
+        ])]);
     }
 
 

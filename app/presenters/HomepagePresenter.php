@@ -123,10 +123,9 @@ class HomepagePresenter extends UI\Presenter{
             return;
         }
 
-        $this->model->beginTransaction();
         $account_id = $this->model->createAccount($values['mail'], $this->session->access_token, $values['frequency']);
-        $this->model->createUsers($account_id, $values['site'], $this->session->access_token);
-        $this->model->commitTransaction();
+        $this->model->scheduleUsers($account_id, $values['site']);
+        $this->model->scheduleWelcomeMail($account_id);
 
         $this->flashMessage('Thank you for signing up!', 'success');
         $this->session->registered = true;

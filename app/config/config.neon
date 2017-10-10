@@ -13,7 +13,7 @@ session:
 
 services:
 	router: App\RouterFactory::createRouter
-	- App\Models\UserModel(%se_api%)
+	- App\Models\UserModel(%se_api%, %redis%)
 
 
 extensions:
