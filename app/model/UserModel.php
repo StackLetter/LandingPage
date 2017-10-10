@@ -56,7 +56,7 @@ class UserModel{
 
 
     public function get($id){
-        return $this->db->select('accounts')->wherer('id', $id)->fetch();
+        return $this->db->select('accounts')->where('id', $id)->fetch();
     }
 
 

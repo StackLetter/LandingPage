@@ -50,7 +50,7 @@ class AsyncJobProcessor{
 
     public function processJob($job, $params){
         if(isset($this->jobProcessors[$job])){
-            $this->log("Processing job %s", $this->jobProcessors[$job]);
+            $this->log("Processing job %s", $job);
             return call_user_func($this->jobProcessors[$job], $params);
         } else{
             return false;
