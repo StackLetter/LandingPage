@@ -3,6 +3,7 @@
 namespace App\Models;
 
 
+use Latte\Engine;
 use Nette;
 use Predis\Client;
 use Nette\Mail\IMailer;
@@ -57,25 +58,35 @@ class AsyncJobProcessor{
         }
     }
 
+
     public function processUserDownload($p){
         $account_id = $p['account_id'];
         $sites = $p['sites'];
         $access_token = $this->userModel->getToken($account_id);
+        if(!$access_token){
+            return false;
+        }
 
         $this->userModel->createUsers($account_id, $sites, $access_token);
     }
 
+
     public function processWelcomeMail($p){
         $account = $this->userModel->get($p['account_id']);
+        if(!$account || !$account->email){
+            return false;
+        }
 
-        $mail = new Nette\Mail\Message();
+        $latte = new Engine;
+
+        $mail = new Nette\Mail\Message;
         $mail->setFrom('stackletter@smasty.net')
              ->addTo($account->email)
-             ->setSubject('Testing Sendgrid')
-             ->setBody('Hello, this is a test of Sendgrid');
+             ->setHtmlBody($latte->renderToString(APP_DIR . '/mail/mail-welcome.latte', $account->toArray()));
 
         $this->mailer->send($mail);
     }
+
 
     private function log($msg){
         $s = call_user_func_array('sprintf', func_get_args()) . "\n";
