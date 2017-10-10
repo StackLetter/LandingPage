@@ -2,20 +2,20 @@ parameters:
 
 
 application:
-	errorPresenter: Error
-	mapping:
-		*: App\*Module\Presenters\*Presenter
+    errorPresenter: Error
+    mapping:
+        *: App\*Module\Presenters\*Presenter
 
 
 session:
-	expiration: 14 days
+    expiration: 14 days
 
 
 services:
-	router: App\RouterFactory::createRouter
-	- App\Models\UserModel(%se_api%, %redis%)
-	- App\Models\AsyncJobProcessor(%redis%)
+    router: App\RouterFactory::createRouter
+    - App\Models\UserModel(%se_api%, %redis%)
+    - App\Models\AsyncJobProcessor(%redis%)
 
 
 extensions:
-	neevo: Neevo\Nette\Extension
+    neevo: Neevo\Nette\Extension

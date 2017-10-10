@@ -55,6 +55,11 @@ class UserModel{
     }
 
 
+    public function get($id){
+        return $this->db->select('accounts')->wherer('id', $id)->fetch();
+    }
+
+
     public function getToken($id){
         return $this->db->select('token', 'accounts')->where('id', $id)->fetchSingle();
     }

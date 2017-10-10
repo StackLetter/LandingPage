@@ -6,7 +6,7 @@ use Nette\DI\Container;
 use Tracy\Debugger;
 
 /** @var Container $container */
-$container = require __DIR__ . '../bootstrap.php';
+$container = require __DIR__ . '/../bootstrap.php';
 
 /** @var AsyncJobProcessor $processor */
 $processor = $container->getByType(AsyncJobProcessor::class);

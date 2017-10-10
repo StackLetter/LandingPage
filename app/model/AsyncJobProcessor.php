@@ -5,6 +5,7 @@ namespace App\Models;
 
 use Nette;
 use Predis\Client;
+use Nette\Mail\IMailer;
 
 class AsyncJobProcessor{
     use Nette\SmartObject;
@@ -15,12 +16,16 @@ class AsyncJobProcessor{
     /** @var Client*/
     private $redis;
 
+    /** @var IMailer */
+    private $mailer;
+
     private $redisParams;
 
     private $jobProcessors;
 
-    public function __construct(array $redisParams, UserModel $userModel){
+    public function __construct(array $redisParams, UserModel $userModel, IMailer $mailer){
         $this->userModel = $userModel;
+        $this->mailer = $mailer;
         $this->redisParams = $redisParams;
         $this->redis = new Client($redisParams['uri']);
 
@@ -45,6 +50,7 @@ class AsyncJobProcessor{
 
     public function processJob($job, $params){
         if(isset($this->jobProcessors[$job])){
+            $this->log("Processing job %s", $this->jobProcessors[$job]);
             return call_user_func($this->jobProcessors[$job], $params);
         } else{
             return false;
@@ -60,7 +66,20 @@ class AsyncJobProcessor{
     }
 
     public function processWelcomeMail($p){
-        // TODO
+        $account = $this->userModel->get($p['account_id']);
+
+        $mail = new Nette\Mail\Message();
+        $mail->setFrom('stackletter@smasty.net')
+             ->addTo($account->email)
+             ->setSubject('Testing Sendgrid')
+             ->setBody('Hello, this is a test of Sendgrid');
+
+        $this->mailer->send($mail);
+    }
+
+    private function log($msg){
+        $s = call_user_func_array('sprintf', func_get_args()) . "\n";
+        echo $s;
     }
 
 }
