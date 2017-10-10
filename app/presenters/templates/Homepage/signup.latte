@@ -31,12 +31,6 @@
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
-                        <label class="control-label">Newsletter frequency</label>
-                        <div>
-                            {input frequency}
-                        </div>
-                    </div>
-                    <div class="form-group form-group-lg">
                         <label n:name="site" class="control-label">Stack Exchange sites</label>
                         <div class="tip-wrapper">
                             <select class="form-control" n:name="site">
@@ -44,6 +38,12 @@
                                 <option value="math">Mathematics</option>
                             </select>
                             <span class="tip fa fa-question-circle" data-title="We only support a limited number of sites at the moment."></span>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-lg">
+                        <label class="control-label">Newsletter frequency</label>
+                        <div class="radiolist">
+                            {input frequency}
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
