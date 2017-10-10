@@ -106,6 +106,8 @@ class HomepagePresenter extends UI\Presenter{
 
         $form->addEmail('mail', 'E-mail')->setRequired();
         $form->addMultiSelect('site', 'Stack Exchange sites', $sites)->setRequired();
+        $form->addRadioList('frequency', 'Newsletter frequency', ['d' => 'Daily', 'w' => 'Weekly'])
+             ->setDefaultValue('d')->setRequired();
         $form->addSubmit('send', 'Authorize & Sign up');
         $form->onSuccess[] = [$this, 'signUpFormSubmitted'];
 
