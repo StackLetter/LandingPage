@@ -1,0 +1,4 @@
+.idea/
+app/config/config.local.neon
+app/data/*
+vendor/

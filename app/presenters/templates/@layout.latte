@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{$basePath}/assets/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{ifset title}{include title|stripHtml} | {/ifset}StackLetter &ndash; Personalized newsletter for Stack Exchange</title>
+</head>
+<body>
+    <nav class="navbar navbar-custom navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="./">StackLetter</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{$basePath}/#about">About</a></li>
+                    <li><a href="{$basePath}/#signup">Sign up</a></li>
+                    <li><a href="{$basePath}/#authors">Authors</a></li>
+                    <li><a href="{$basePath}/#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+	<div class="alert-wrapper" n:if="!empty($flashes)">
+		<div n:foreach="$flashes as $flash" n:class="alert, alert-dismissable, fade, in, 'alert-'.$flash->type">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			{$flash->message}
+		</div>
+	</div>
+
+	{include content}
+
+    <div class="gray-block footer">
+        <div class="container">
+            <div class="logo text-center">
+                <img src="{$basePath}/assets/img/logo-128.png" alt="StackLetter" height="72">
+                <h2>StackLetter</h2>
+            </div>
+            <p class="text-center">
+                A project by <a href="https://github.com/mmatusSVK">Matúš Salát</a> and <a href="https://smasty.net">Martin Šrank</a>. Find our code on <a href="https://github.com/StackLetter">GitHub</a>.
+            </p>
+        </div>
+    </div>
+
+	{block scripts}
+		<script src="{$basePath}/assets/js/jquery.min.js"></script>
+		<script src="{$basePath}/assets/js/bootstrap.min.js"></script>
+		<script src="{$basePath}/assets/js/bootstrap-select.min.js"></script>
+		<script src="{$basePath}/assets/js/main.js"></script>
+	{/block}
+</body>
+</html>

@@ -1,0 +1,158 @@
+{block content}
+<div class="jumbotron">
+    <div class="container">
+        <h1>Want better newsletters on <span class="img-replace" title="Stack Overflow">Stack Overflow</span> ?</h1>
+        <p>StackLetter is a personalized newsletter for the Stack Exchange Network.</p>
+        <p class="btn-block"><a class="btn btn-custom btn-xl" href="#signup" role="button">Yes, please!</a></p>
+    </div>
+</div>
+<div class="gray-block">
+    <div class="container">
+        <div class="overlap">
+            <ul class="features pos">
+                <li><span class="fa fa-check-circle"></span>Relevant newsletter sections</li>
+                <li><span class="fa fa-check-circle"></span>Personalized questions</li>
+                <li><span class="fa fa-check-circle"></span>Interesting site statistics</li>
+            </ul>
+            <ul class="features neg">
+                <li><span class="fa fa-times-circle"></span>No random questions</li>
+                <li><span class="fa fa-times-circle"></span>No filter bubble</li>
+                <li><span class="fa fa-times-circle"></span>No months old content</li>
+            </ul>
+        </div>
+
+        <h1 class="sec-title" id="about">What is StackLetter?</h1>
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <p class="lead">
+                StackLetter is a dolor sit amet, consectetur adipisicing elit. Maiores corrupti culpa cum est. Alias deleniti, eum facilis laborum quo eos. Omnis amet beatae, vitae, veniam.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5 col-md-offset-1">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, quasi? Ratione dolor ab quis nobis. Accusantium similique, alias unde quisquam harum hic, ipsum laudantium, pariatur deserunt ipsa, neque laborum error. Ex tenetur explicabo quibusdam, possimus omnis esse, vel non nobis velit quo odio commodi reprehenderit vero consectetur suscipit blanditiis. Quae cumque cupiditate praesentium dolores iusto culpa ex fugit laborum animi!</p>
+            </div>
+            <div class="col-md-5">
+                <p>Vero rerum, consequatur esse accusantium, atque similique fugit voluptates. Vero dolor delectus quia iusto, explicabo mollitia numquam nulla suscipit, maxime animi ratione! Culpa ullam consequuntur expedita nihil quo voluptates deserunt autem animi nam dolore inventore impedit magni ex veritatis maiores ipsam deleniti dolor iste, debitis tenetur sunt tempore ipsa consectetur.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="white-block">
+    <div class="container">
+        <h1 class="sec-title" id="signup">Sign up for StackLetter</h1>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <p class="lead text-center">
+                You will <span class="fa fa-heart"></span> our personalized version of the Stack Exchange Network newsletters.
+                </p>
+            </div>
+        </div>
+        <ol class="signup-steps">
+            <li class="done">Authorize</li>
+            <li n:class="isset($presenter->session->registered) ? done">Select sites</li>
+            <li n:class="isset($presenter->session->registered) ? done">Done!</li>
+        </ol>
+
+        <p class="text-center lead" n:ifset="$presenter->session->registered">
+            <br><span class="fa fa-check-circle"></span> You're all done!
+        </p>
+
+        <p class="text-center" n:if="!isset($presenter->session->registered)">
+            <br><a n:href="authorize!" class="btn btn-lg btn-primary"><span class="fa fa-lock"></span> Authorize StackLetter</a>
+        </p>
+    </div>
+</div>
+
+<div class="gray-block">
+    <div class="container">
+        <h1 class="sec-title" id="authors">People behind StackLetter</h1>
+
+        <p class="lead text-center">
+            StackLetter is a diploma thesis project of Data Analysis Research Group<br>
+            at Faculty of Informatics and Information technology, Slovak University of Technology in Bratislava.
+        </p>
+
+        <div class="row">
+            <div class="col-md-4 author">
+                <img src="{$basePath}/assets/img/matus.jpg" alt="Matúš Salát">
+                <h3>Bc. Matúš Salát</h3>
+                <p>Master's student at FIIT STU</p>
+                <p class="contact">
+                    <i class="fa fa-envelope"></i> <a href="mailto:matus@stackletter.net">matus@stackletter.net</a><br>
+                    <i class="fa fa-github"></i> <a href="https://github.com/mmatusSVK">mmatusSVK</a><br>
+                </p>
+            </div>
+            <div class="col-md-4 author">
+                <img src="{$basePath}/assets/img/martin.jpg" alt="Martin Šrank">
+                <h3>Bc. Martin Šrank</h3>
+                <p>Master's student at FIIT STU</p>
+                <p class="contact">
+                    <i class="fa fa-envelope"></i> <a href="mailto:martin@stackletter.net">martin@stackletter.net</a><br>
+                    <i class="fa fa-github"></i> <a href="https://github.com/smasty">smasty</a><br>
+                    <i class="fa fa-twitter"></i> <a href="https://twitter.com/smasty">smasty</a><br>
+                </p>
+            </div>
+            <div class="col-md-4 author">
+                <img src="{$basePath}/assets/img/ivan.jpg" alt="Ivan Srba">
+                <h3>Ivan Srba, PhD.</h3>
+                <p>Supervisor<br>Research fellow at FIIT STU</p>
+                <p class="contact">
+                    <i class="fa fa-envelope"></i> <a href="mailto:ivan@stackletter.net">ivan@stackletter.net</a><br>
+                    <i class="fa fa-github"></i> <a href="https://github.com/mmatusSVK">isrba</a><br>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 faculty">
+                <p class="text-center">
+                    <a href="http://www.fiit.stuba.sk/en"><img src="{$basePath}/assets/img/fiit.png" alt="" height="52"></a>
+                    <a href="https://www.pewe.sk/datalys"><img src="{$basePath}/assets/img/datalys.png" alt="" height="60"></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="white-block">
+    <div class="container">
+        <h1 class="sec-title" id="contact">Contact us</h1>
+        <p class="lead text-center">If you have any questions or concerns, don't hesitate to contact us.</p>
+        <div class="row">
+            <div class="col-md-9 col-md-offset-1">
+                <form action="./" method="post" class="form-horizontal contact-form">
+                    <div class="form-group">
+                        <label for="contact-name" class="col-sm-4 control-label">Name</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="contact-name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-mail" class="col-sm-4 control-label">E-mail</label>
+                        <div class="col-sm-6">
+                            <input type="mail" class="form-control" id="contact-mail" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-body" class="col-sm-4 control-label">Message</label>
+                        <div class="col-sm-6">
+                            <textarea id="contact-body" cols="30" rows="5" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-lg">
+                        <label class="col-sm-4 control-label"></label>
+                        <div class="col-sm-6">
+                            <button type="submit" class="btn btn-lg btn-primary btn-block">Send</button>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
