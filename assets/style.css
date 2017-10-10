@@ -41,7 +41,7 @@ body{padding-top: 60px;font-size:16px;line-height: 1.5;}
 .signup-form{margin:2em 0}
 
 .radiolist label{font-weight:normal;margin-right:20px}
-.radiolist label input{margin-right:5px;position:relative;top:-3px}
+.radiolist label input{margin-right:5px;position:relative;top:3px}
 .radiolist br{display:none}
 
 .tip-wrapper{position: relative;}
