@@ -29,9 +29,9 @@ class UserModel{
     /**
      * @var \Predis\Client
      */
-    private $redis;
+    public $redis;
 
-    private $redisParams;
+    public $redisParams;
 
 
     public function __construct(array $apiParams, array $redisParams, Manager $db){
@@ -58,6 +58,11 @@ class UserModel{
 
     public function getByEmail($email){
         return $this->db->select('accounts')->where('email', $email)->fetch();
+    }
+
+
+    public function getToken($id){
+        return $this->db->select('token', 'accounts')->where('id', $id)->fetchSingle();
     }
 
 
@@ -98,21 +103,21 @@ class UserModel{
 
 
     public function scheduleUsers($account_id, $sites){
-        $this->redis->lpush($this->redisParams['job_queue'], [json_encode([
+        $this->redis->lpush($this->redisParams['job_queue'], json_encode([
             'job' => 'stackletter.user.download',
             'params' => [
                 'account_id' => $account_id,
                 'sites' => $sites
             ]
-        ])]);
+        ]));
     }
 
 
     public function scheduleWelcomeMail($account_id){
-        $this->redis->lpush($this->redisParams['job_queue'], [json_encode([
+        $this->redis->lpush($this->redisParams['job_queue'], json_encode([
             'job' => 'stackletter.mail.welcome',
             'params' => ['account_id' => $account_id]
-        ])]);
+        ]));
     }
 
 
