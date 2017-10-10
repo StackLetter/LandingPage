@@ -51,10 +51,11 @@ class UserModel{
     }
 
 
-    public function createAccount($mail, $token){
+    public function createAccount($mail, $token, $frequency){
         return $this->db->insert('accounts', [
             'email' => $mail,
-            'token' => $token
+            'token' => $token,
+            'frequency' => $frequency
         ])->insertId();
     }
 

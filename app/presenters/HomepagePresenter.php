@@ -124,7 +124,7 @@ class HomepagePresenter extends UI\Presenter{
         }
 
         $this->model->beginTransaction();
-        $account_id = $this->model->createAccount($values['mail'], $this->session->access_token);
+        $account_id = $this->model->createAccount($values['mail'], $this->session->access_token, $values['frequency']);
         $this->model->createUsers($account_id, $values['site'], $this->session->access_token);
         $this->model->commitTransaction();
 
