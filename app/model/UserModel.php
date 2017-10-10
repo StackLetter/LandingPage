@@ -14,21 +14,15 @@ use Tracy\Debugger;
 class UserModel{
     use Nette\SmartObject;
 
-    /**
-     * @var Manager
-     */
+    /** @var Manager */
     private $db;
 
-    /**
-     * @var Client
-     */
+    /** @var Client */
     private $http;
 
     private $apiParams;
 
-    /**
-     * @var \Predis\Client
-     */
+    /** @var \Predis\Client */
     public $redis;
 
     public $redisParams;

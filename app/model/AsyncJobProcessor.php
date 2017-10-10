@@ -9,22 +9,18 @@ use Predis\Client;
 class AsyncJobProcessor{
     use Nette\SmartObject;
 
-    /**
-     * @var UserModel
-     * @inject
-     */
-    public $userModel;
+    /** @var UserModel */
+    private $userModel;
 
-    /**
-     * @var Client
-     */
+    /** @var Client*/
     private $redis;
 
     private $redisParams;
 
     private $jobProcessors;
 
-    public function __construct(array $redisParams){
+    public function __construct(array $redisParams, UserModel $userModel){
+        $this->userModel = $userModel;
         $this->redisParams = $redisParams;
         $this->redis = new Client($redisParams['uri']);
 
@@ -37,7 +33,7 @@ class AsyncJobProcessor{
 
     public function run(){
         while(1){
-            $data = $this->redis->brpop($this->redisParams['job_queue']);
+            list($_, $data) = $this->redis->brpop($this->redisParams['job_queue'], 0);
             $job = json_decode($data, true);
             if(!isset($job['job'])){
                 continue;
