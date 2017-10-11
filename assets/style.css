@@ -78,6 +78,20 @@ body{padding-top: 60px;font-size:16px;line-height: 1.5;}
 	font-size: 14px; 
 }
 
+.about-stack-letter {
+	height: 180px;
+}
+
+.about-stack-letter p {
+	margin: 0;
+	height: 26%;
+}
+
+.about-stack-letter p:first-child {
+	margin: 0;
+	font-size: 20px;
+	height: 22%;
+}
 
 /*!
  * Bootstrap-select v1.12.4 (http://silviomoreto.github.io/bootstrap-select)
