@@ -51,8 +51,10 @@ class AsyncJobProcessor{
 
     public function processJob($job, $params){
         if(isset($this->jobProcessors[$job])){
-            $this->log("Processing job %s", $job);
-            return call_user_func($this->jobProcessors[$job], $params);
+            $this->log("Processing job %s... ", $job);
+            $res = call_user_func($this->jobProcessors[$job], $params);
+            $this->log("done (%s)\n", $res ? 'OK' : 'FAIL');
+            return $res;
         } else{
             return false;
         }
@@ -68,6 +70,7 @@ class AsyncJobProcessor{
         }
 
         $this->userModel->createUsers($account_id, $sites, $access_token);
+        return true;
     }
 
 
@@ -80,16 +83,17 @@ class AsyncJobProcessor{
         $latte = new Engine;
 
         $mail = new Nette\Mail\Message;
-        $mail->setFrom('stackletter@smasty.net')
+        $mail->setFrom('info@stackletter.com')
              ->addTo($account->email)
              ->setHtmlBody($latte->renderToString(APP_DIR . '/mail/mail-welcome.latte', $account->toArray()));
 
         $this->mailer->send($mail);
+        return true;
     }
 
 
     private function log($msg){
-        $s = call_user_func_array('sprintf', func_get_args()) . "\n";
+        $s = call_user_func_array('sprintf', func_get_args());
         echo $s;
     }
 
