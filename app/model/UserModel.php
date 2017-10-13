@@ -126,7 +126,9 @@ class UserModel{
             if(!$data){
                 continue;
             }
-            Debugger::barDump($data);
+            if($this->db->select('users')->where('external_id', $data['user_id'])->fetch()){
+                continue;
+            }
             $this->db->insert('users',[
                 'account_id' => $account_id,
                 'external_id' => $data['user_id'],
