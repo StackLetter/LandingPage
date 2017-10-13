@@ -8,6 +8,7 @@ use GuzzleHttp\Exception\ClientException;
 use Nette\Application\UI;
 use Nette\Http\SessionSection;
 use Nette\Http\Url;
+use Nette\Mail;
 
 
 /**
@@ -115,7 +116,7 @@ class HomepagePresenter extends UI\Presenter{
     }
 
     public function signUpFormSubmitted(UI\Form $form){
-        $values = (array)$form->values;
+        $values = (array) $form->values;
 
         // Check for existing e-mail
         if($this->model->getByEmail($values['mail']) !== false){
@@ -132,5 +133,35 @@ class HomepagePresenter extends UI\Presenter{
         $this->redirect('default#signup');
     }
 
+
+    protected function createComponentContactForm(){
+        $form = new UI\Form;
+
+        $form->addText('name', 'Name')->setRequired();
+        $form->addEmail('mail', 'E-mail')->setRequired();
+        $form->addTextArea('body', 'Message')->setRequired();
+        $form->addSubmit('send', 'Send');
+        $form->onSuccess[] = [$this, 'contactFormSubmitted'];
+
+        return $form;
+    }
+
+
+    public function contactFormSubmitted(UI\Form $form){
+        $values = (array) $form->values;
+
+        $mail = new Mail\Message;
+        $mail->setFrom("$values[name] <$values[mail]>")
+             ->setSubject('[StackLetter] Contact')
+             ->setBody($values['body']);
+        foreach($this->config['contact'] as $addr){
+            $mail->addTo($addr);
+        }
+
+        $this->context->getByType(Mail\IMailer::class)->send($mail);
+
+        $this->flashMessage('Thank you for your message. We\'ll get back to you as soon as possible.', 'success');
+        $this->redirect('this#contact');
+    }
 
 }

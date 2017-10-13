@@ -124,29 +124,32 @@
         <p class="lead text-center">If you have any questions or concerns, don't hesitate to contact us.</p>
         <div class="row">
             <div class="col-md-9 col-md-offset-1">
-                <form action="./" method="post" class="form-horizontal contact-form">
+                <form n:name="contactForm" class="form-horizontal contact-form">
+                    <div class="alert alert-danger" n:if="$form->hasErrors()">
+                        <p n:foreach="$form->errors as $error">{$error}</p>
+                    </div>
                     <div class="form-group">
-                        <label for="contact-name" class="col-sm-4 control-label">Name</label>
+                        <label n:name="name" class="col-sm-4 control-label">Name</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="contact-name" required>
+                            <input type="text" class="form-control" n:name="name">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="contact-mail" class="col-sm-4 control-label">E-mail</label>
+                        <label n:name="mail" class="col-sm-4 control-label">E-mail</label>
                         <div class="col-sm-6">
-                            <input type="mail" class="form-control" id="contact-mail" required>
+                            <input type="mail" class="form-control" n:name="mail">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="contact-body" class="col-sm-4 control-label">Message</label>
+                        <label n:name="body" class="col-sm-4 control-label">Message</label>
                         <div class="col-sm-6">
-                            <textarea id="contact-body" cols="30" rows="5" class="form-control"></textarea>
+                            <textarea n:name="body" cols="30" rows="5" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="col-sm-4 control-label"></label>
                         <div class="col-sm-6">
-                            <button type="submit" class="btn btn-lg btn-primary btn-block">Send</button>
+                            <button n:name="send" class="btn btn-lg btn-primary btn-block">Send</button>
                         </div>
                     </div>
                     <div class="text-right">
