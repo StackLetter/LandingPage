@@ -141,6 +141,8 @@ class UserModel{
                 continue;
             }
             if($this->db->select('users')->where('external_id', $data['user_id'])->fetch()){
+                $this->db->update('users', ['account_id' => $account_id])
+                    ->where('external_id', $data['external_id'])->run();
                 continue;
             }
             $site_id = $this->db->select('id', 'sites')->where('api', $site)->fetchSingle();
