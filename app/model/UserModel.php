@@ -7,6 +7,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use Neevo\Literal;
 use Neevo\Manager;
+use Neevo\NeevoException;
 use Nette;
 use Nette\Utils\DateTime;
 use Tracy\Debugger;
@@ -83,7 +84,7 @@ class UserModel{
                 ->where('enabled', true)
                 ->where('name', $sites)
                 ->fetchPairs('api', 'name')
-            : [];
+            : false;
     }
 
 
@@ -140,32 +141,42 @@ class UserModel{
             if(!$data){
                 continue;
             }
-            if($this->db->select('users')->where('external_id', $data['user_id'])->fetch()){
-                $this->db->update('users', ['account_id' => $account_id])
-                    ->where('external_id', $data['external_id'])->run();
-                continue;
+
+            $this->db->begin();
+            try{
+
+                if($this->db->select('users')->where('external_id', $data['user_id'])->fetch()){
+                    $this->db->update('users', ['account_id' => $account_id])
+                        ->where('external_id', $data['external_id'])
+                        ->run();
+                    continue;
+                }
+                $site_id = $this->db->select('id', 'sites')->where('api', $site)->fetchSingle();
+                $this->db->insert('users', [
+                    'account_id' => $account_id,
+                    'external_id' => $data['user_id'],
+                    'site_id' => $site_id,
+                    'age' => $data['age'] ?? null,
+                    'reputation' => $data['reputation'],
+                    'accept_rate' => $data['accept_rate'] ?? null,
+                    'reputation_change_month' => $data['reputation_change_month'],
+                    'reputation_change_year' => $data['reputation_change_year'],
+                    'reputation_change_week' => $data['reputation_change_week'],
+                    'creation_date' => DateTime::from($data['creation_date']),
+                    'last_access_date' => DateTime::from($data['last_access_date']),
+                    'display_name' => $data['display_name'],
+                    'user_type' => $data['user_type'],
+                    'website_url' => $data['website_url'] ?? null,
+                    'location' => $data['location'] ?? null,
+                    'is_employee' => (bool)$data['is_employee'],
+                    'created_at' => new Literal('NOW()'),
+                    'updated_at' => new Literal('NOW()'),
+                ])->run();
+            } catch(NeevoException $e){
+                Debugger::log($e);
+                $this->db->rollback();
             }
-            $site_id = $this->db->select('id', 'sites')->where('api', $site)->fetchSingle();
-            $this->db->insert('users',[
-                'account_id' => $account_id,
-                'external_id' => $data['user_id'],
-                'site_id' => $site_id,
-                'age' => $data['age'] ?? null,
-                'reputation' => $data['reputation'],
-                'accept_rate' => $data['accept_rate'] ?? null,
-                'reputation_change_month' => $data['reputation_change_month'],
-                'reputation_change_year' => $data['reputation_change_year'],
-                'reputation_change_week' => $data['reputation_change_week'],
-                'creation_date' => DateTime::from($data['creation_date']),
-                'last_access_date' => DateTime::from($data['last_access_date']),
-                'display_name' => $data['display_name'],
-                'user_type' => $data['user_type'],
-                'website_url' => $data['website_url'] ?? null,
-                'location' => $data['location'] ?? null,
-                'is_employee' => (bool) $data['is_employee'],
-                'created_at' => new Literal('NOW()'),
-                'updated_at' => new Literal('NOW()'),
-            ])->run();
+            $this->db->commit();
         }
     }
 

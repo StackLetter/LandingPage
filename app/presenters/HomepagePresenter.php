@@ -106,7 +106,10 @@ class HomepagePresenter extends UI\Presenter{
         $sites = $this->model->retrieveUserSites($this->session->access_token);
 
         $form->addEmail('mail', 'E-mail')->setRequired();
-        $form->addMultiSelect('site', 'Stack Exchange sites', $sites)->setRequired();
+
+        if($sites !== false){
+            $form->addMultiSelect('site', 'Stack Exchange sites', $sites)->setRequired();
+        }
         $form->addRadioList('frequency', 'Newsletter frequency', ['d' => 'Daily', 'w' => 'Weekly'])
              ->setDefaultValue('d')->setRequired();
         $form->addSubmit('send', 'Authorize & Sign up');
@@ -125,7 +128,9 @@ class HomepagePresenter extends UI\Presenter{
         }
 
         $account_id = $this->model->createAccount($values['mail'], $this->session->access_token, $values['frequency']);
-        $this->model->scheduleUsers($account_id, $values['site']);
+        if(isset($values['site'])){
+            $this->model->scheduleUsers($account_id, $values['site']);
+        }
         $this->model->scheduleWelcomeMail($account_id);
 
         $this->flashMessage('Thank you for signing up!', 'success');

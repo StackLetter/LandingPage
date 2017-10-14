@@ -23,6 +23,10 @@
                     <div class="alert alert-danger" n:if="$form->hasErrors()">
                         <p n:foreach="$form->errors as $error">{$error}</p>
                     </div>
+                    <div class="alert alert-info" n:if="!isset($form['site'])">
+                        We currently do not support any of the Stack Exchange sites you are signed up for.
+                        Leave us your e-mail and we will update you when we add support for some of them.
+                    </div>
                     <div class="form-group form-group-lg">
                         <label n:name="mail" class="control-label">E-mail</label>
                         <div class="tip-wrapper">
@@ -30,7 +34,7 @@
                             <span class="tip fa fa-question-circle" data-title="We will only use your address for delivering the newsletter. You can unsubscribe anytime."></span>
                         </div>
                     </div>
-                    <div class="form-group form-group-lg">
+                    <div class="form-group form-group-lg" n:ifset="$form['site']">
                         <label n:name="site" class="control-label">Stack Exchange sites</label>
                         <div class="tip-wrapper">
                             <select class="form-control" n:name="site">
