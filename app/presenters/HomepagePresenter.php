@@ -137,6 +137,7 @@ class HomepagePresenter extends UI\Presenter{
     protected function createComponentContactForm(){
         $form = new UI\Form;
 
+        $form->addProtection();
         $form->addText('name', 'Name')->setRequired();
         $form->addEmail('mail', 'E-mail')->setRequired();
         $form->addTextArea('body', 'Message')->setRequired();
