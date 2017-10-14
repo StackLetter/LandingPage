@@ -7,8 +7,9 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <p class="lead text-center">
-                You will <span class="fa fa-heart"></span> our personalized version of the Stack Exchange Network newsletters.
+                  StackLetter will work as standard StackExchange newsletter. After signing up, you will choose from available StackExchange platforms for sending personalized newsletter.
                 </p>
+                <br>
             </div>
         </div>
         <ol class="signup-steps">
@@ -31,8 +32,8 @@
                         <label n:name="mail" class="control-label">E-mail</label>
                         <div class="tip-wrapper">
                             <input n:name="mail" class="form-control">
-                            <span class="tip fa fa-question-circle" data-title="We will only use your address for delivering the newsletter. You can unsubscribe anytime."></span>
                         </div>
+                        <p class="input-detail">We will only use your address for delivering the newsletter. You can unsubscribe anytime.</p>
                     </div>
                     <div class="form-group form-group-lg" n:ifset="$form['site']">
                         <label n:name="site" class="control-label">Stack Exchange sites</label>
@@ -41,8 +42,8 @@
                                 <option value="se">Software Engineering</option>
                                 <option value="math">Mathematics</option>
                             </select>
-                            <span class="tip fa fa-question-circle" data-title="We only support a limited number of sites at the moment."></span>
                         </div>
+                        <p class="input-detail">We only support a limited number of sites at the moment.</p>
                     </div>
                     <div class="form-group form-group-lg">
                         <label class="control-label">Newsletter frequency</label>
