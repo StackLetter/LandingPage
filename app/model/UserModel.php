@@ -77,25 +77,37 @@ class UserModel{
 
 
     public function retrieveUserSites($token){
+        $sites = $this->fetchUserSites($token);
+        return !empty($sites)
+            ? $this->db->select('sites')
+                ->where('enabled', true)
+                ->where('name', $sites)
+                ->fetchPairs('api', 'name')
+            : [];
+    }
 
+
+    private function fetchUserSites($token, $page = 1){
         try{
             $res = $this->http->get('me/associated', ['query' => [
                 'access_token' => $token,
-                'key' => $this->apiParams['key']
+                'key' => $this->apiParams['key'],
+                'filter' => '!w*vbPYOwJWIjXz4IU2',
+                'pagesize' => 100,
+                'page' => $page,
             ]]);
 
+            $json = json_decode($res->getBody(), true);
             $sites = [];
-            foreach(json_decode($res->getBody(), true)['items'] as $site){
+            foreach($json['items'] as $site){
                 $sites[] = $site['site_name'];
             }
-            if(empty($sites)){
-                return [];
+
+            if($json['has_more'] === true){
+                return array_merge($sites, $this->fetchUserSites($token, $page + 1));
             }
 
-            return $this->db->select('sites')
-                ->where('enabled', true)
-                ->where('name', $sites)
-                ->fetchPairs('api', 'name');
+            return $sites;
 
         } catch(ClientException $e){
             return false;
