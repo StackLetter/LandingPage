@@ -131,9 +131,11 @@ class UserModel{
             if($this->db->select('users')->where('external_id', $data['user_id'])->fetch()){
                 continue;
             }
+            $site_id = $this->db->select('id', 'sites')->where('api', $site)->fetchSingle();
             $this->db->insert('users',[
                 'account_id' => $account_id,
                 'external_id' => $data['user_id'],
+                'site_id' => $site_id,
                 'age' => $data['age'] ?? null,
                 'reputation' => $data['reputation'],
                 'accept_rate' => $data['accept_rate'] ?? null,
