@@ -1,6 +1,4 @@
 parameters:
-    contact:
-        - hello@smasty.net
 
 
 application:
