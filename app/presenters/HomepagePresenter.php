@@ -151,7 +151,7 @@ class HomepagePresenter extends UI\Presenter{
         $values = (array) $form->values;
 
         $mail = new Mail\Message;
-        $mail->setFrom("$values[name] <$values[mail]>")
+        $mail->setFrom($values['mail'], $values['name'])
              ->setSubject('[StackLetter] Contact')
              ->setBody($values['body']);
         foreach($this->config['contact'] as $addr){
