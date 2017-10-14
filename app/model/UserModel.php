@@ -69,7 +69,9 @@ class UserModel{
         return $this->db->insert('accounts', [
             'email' => $mail,
             'token' => $token,
-            'frequency' => $frequency
+            'frequency' => $frequency,
+            'created_at' => new Literal('NOW()'),
+            'updated_at' => new Literal('NOW()'),
         ])->insertId();
     }
 
