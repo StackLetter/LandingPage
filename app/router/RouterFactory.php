@@ -18,6 +18,7 @@ class RouterFactory
 	{
 		$router = new RouteList;
 		$router[] = new Route('<action>[/<id>]', 'Homepage:default');
+		$router[] = new Route('hook/<action>[/<id>]', 'Webhook:default');
 		return $router;
 	}
 }
