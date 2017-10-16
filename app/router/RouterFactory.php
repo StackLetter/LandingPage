@@ -17,8 +17,8 @@ class RouterFactory
 	public static function createRouter()
 	{
 		$router = new RouteList;
-		$router[] = new Route('<action>[/<id>]', 'Homepage:default');
 		$router[] = new Route('hook/<action>[/<id>]', 'Webhook:default');
+		$router[] = new Route('<action>[/<id>]', 'Homepage:default');
 		return $router;
 	}
 }
