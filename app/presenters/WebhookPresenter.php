@@ -30,7 +30,7 @@ class WebhookPresenter extends UI\Presenter{
         } else{
             $msg->setBody($post['text']);
         }
-        $msg->setHeader('X-Sender-IP', $post['sender_ip'] ?? NULL)
+        $msg->setHeader('X-Mailer', 'StackLetter')
             ->setHeader('X-Spam-Report', $post['spam_report'] ?? NULL)
             ->setHeader('X-Spam-Score', $post['spam_score'] ?? NULL)
             ->setHeader('X-DKIM-Result', $post['dkim'] ?? NULL)
