@@ -35,7 +35,8 @@ class WebhookPresenter extends UI\Presenter{
             ->setHeader('X-Spam-Score', $post['spam_score'] ?? NULL)
             ->setHeader('X-DKIM-Result', $post['dkim'] ?? NULL)
             ->setHeader('X-SPF-Result', $post['SPF'] ?? NULL)
-            ->setHeader('X-Attachments', $post['attachments'] ?? NULL);
+            ->setHeader('X-Attachments', $post['attachments'] ?? NULL)
+            ->setHeader('X-Original-To', $post['to'] ?? NULL);
 
         $this->context->getByType(Mail\IMailer::class)->send($msg);
 
