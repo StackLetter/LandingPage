@@ -16,7 +16,7 @@ class WebhookPresenter extends UI\Presenter{
         $post = $this->request->post;
         $mailParams = $this->context->parameters['mail'];
 
-        if(!isset($post['envelope']['to']) || strpos($post['envelope']['to'][0], $mailParams['sender']) === false){
+        if(!isset($post['to']) || strpos($post['to'], $mailParams['sender']) === false){
             $this->sendResponse(new TextResponse(''));
         }
         $msg = new Mail\Message;
