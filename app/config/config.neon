@@ -14,7 +14,7 @@ session:
 services:
     router: App\RouterFactory::createRouter
     - App\Models\UserModel(%se_api%, %redis%)
-    - App\Models\AsyncJobProcessor(%redis%)
+    - App\Models\AsyncJobProcessor(%redis%, %mail%)
 
 
 extensions:

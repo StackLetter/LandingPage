@@ -160,7 +160,7 @@ class HomepagePresenter extends UI\Presenter{
         $mail->setFrom($values['mail'], $values['name'])
              ->setSubject('[StackLetter] Contact')
              ->setBody($values['body']);
-        foreach($this->config['contact'] as $addr){
+        foreach($this->config['mail']['receivers'] as $addr){
             $mail->addTo($addr);
         }
 

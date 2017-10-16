@@ -21,13 +21,15 @@ class AsyncJobProcessor{
     private $mailer;
 
     private $redisParams;
+    private $mailParams;
 
     private $jobProcessors;
 
-    public function __construct(array $redisParams, UserModel $userModel, IMailer $mailer){
+    public function __construct(array $redisParams, array $mailParams, UserModel $userModel, IMailer $mailer){
         $this->userModel = $userModel;
         $this->mailer = $mailer;
         $this->redisParams = $redisParams;
+        $this->mailParams = $mailParams;
         $this->redis = new Client($redisParams['uri']);
 
         $this->jobProcessors = [
@@ -83,7 +85,7 @@ class AsyncJobProcessor{
         $latte = new Engine;
 
         $mail = new Nette\Mail\Message;
-        $mail->setFrom('info@stackletter.com')
+        $mail->setFrom($this->mailParams['sender'])
              ->addTo($account->email)
              ->setHtmlBody($latte->renderToString(APP_DIR . '/mail/mail-welcome.latte', $account->toArray()));
 
