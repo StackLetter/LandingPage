@@ -9,7 +9,7 @@ $configurator = new Nette\Configurator;
 $configurator->setDebugMode('147.175.184.24'); // enable for your remote IP
 $configurator->enableTracy(__DIR__ . '/log');
 
-$configurator->setTimeZone('Europe/Prague');
+$configurator->setTimeZone('UTC');
 $configurator->setTempDirectory(__DIR__ . '/temp');
 
 $configurator->createRobotLoader()
