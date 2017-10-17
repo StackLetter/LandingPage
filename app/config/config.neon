@@ -16,6 +16,7 @@ services:
     router: App\RouterFactory::createRouter
     - App\Models\UserModel(%se_api%, %redis%)
     - App\Models\AsyncJobProcessor(%redis%, %mail%)
+    - App\Models\SubscriptionModel(%unsubscribe%)
 
 
 extensions:

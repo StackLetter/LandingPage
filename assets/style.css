@@ -1,5 +1,6 @@
 html{background:#f1f1f1}
 body{padding-top: 60px;font-size:16px;line-height: 1.5;}
+strong.lite{font-weight:500}
 
 .navbar-custom{color:#fff;background:linear-gradient(-45deg, hsl(193, 43%, 45%) 15%, hsl(232, 45%, 64%));border-bottom:1px solid rgba(255,255,255,.1);padding:5px 0}
 .navbar-custom a.navbar-brand{font-size: 24px;color:#fff;}
