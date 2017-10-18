@@ -84,10 +84,12 @@ class AsyncJobProcessor{
 
         $latte = new Engine;
 
+        $baseDir = APP_DIR . '/mail';
+
         $mail = new Nette\Mail\Message;
         $mail->setFrom($this->mailParams['sender'])
              ->addTo($account->email)
-             ->setHtmlBody($latte->renderToString(APP_DIR . '/mail/mail-welcome.latte', $account->toArray()))
+             ->setHtmlBody($latte->renderToString($baseDir . '/mail-welcome.latte', $account->toArray()), $baseDir)
              ->setHeader('X-Mailer', 'StackLetter');
 
         $this->mailer->send($mail);

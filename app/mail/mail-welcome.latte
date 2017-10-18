@@ -1,16 +1,35 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Welcome to StackLetter!</title>
-    <style>
-    </style>
+    <meta charset="UTF-8">
 </head>
 <body>
-    <h1>Welcome to StackLetter!</h1>
-
-    <p>We're glad you decided to join our {if $frequency == 'd'}daily{else}weekly{/if} newsletter.</p>
-
-    <p style="margin-top: 30px">If you have any questions, don't hesitate to contact us by replying to this message.</p>
+    <div style="max-width: 600px;margin: 0 auto;font: 14px/1.4 arial, sans-serif;">
+        <div style="background: #418FA4;">
+            <div style="height: 90px;"><img src="assets/header-bg.png" alt="" width="600" height="90"></div>
+            <h1 style="color: #fff;font-size: 22px;font-weight: 600;margin: -90px 0 0;padding: 0;height: 85px;line-height: 85px;">
+                <img src="assets/logo.png" alt="" height="75" style="vertical-align: middle;padding: 0 5px 0 20px;">
+                StackLetter &ndash; Welcome
+            </h1>
+        </div>
+        <div style="padding: 40px 20px 20px;">
+            <h2 style="font-weight: 400;font-size: 21px;margin: 0;color: #444;">Thank you for subscribing!</h2>
+            <p style="margin: 1em 0;font-weight: 400;color: #444;">
+                Thank you for subscribing to our <b>{if $frequency == 'd'}daily{else}weekly{/if}</b> personalized newsletters. We hope you will enjoy them.
+                The first one will be sent to you soon.
+            </p>
+            <p style="margin: 1em 0;font-weight: 400;color: #444;">
+                If you have any questions or concerns, don't hesitate to <a href="https://stackletter.com/#contact" style="color: #418FA4;text-decoration: underline;">contact us</a>
+                or simply reply to this e-mail.
+            </p>
+            <p style="margin: 1em 0;font-weight: 400;color: #444;">
+                &ndash; Team StackLetter
+            </p>
+        </div>
+        <div style="border-top: 3px solid #eee;padding: 5px 10px;">
+            <p style="color: #777;font-size: 10px;margin: .5em 0;text-align: center;"><b>StackLetter</b> &ndash; Personalized Stack Exchange newsletters. | <a href="mailto:info@stackletter.com" style="color: #418FA4;text-decoration: underline;">info@stackletter.com</a></p>
+            <p style="color: #777;font-size: 10px;margin: .5em 0;">You received this e-mail because you subscribed to StackLetter personalized newsletters for Stack Exchange Network.</p>
+        </div>
+    </div>
 </body>
 </html>
-
