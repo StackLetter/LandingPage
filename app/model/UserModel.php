@@ -73,6 +73,7 @@ class UserModel{
             'frequency' => $frequency,
             'created_at' => new Literal('NOW()'),
             'updated_at' => new Literal('NOW()'),
+            'available_token' => true,
         ])->insertId();
     }
 
@@ -168,9 +169,9 @@ class UserModel{
                     'user_type' => $data['user_type'],
                     'website_url' => $data['website_url'] ?? null,
                     'location' => $data['location'] ?? null,
-                    'is_employee' => (bool)$data['is_employee'],
+                    'is_employee' => (bool) $data['is_employee'],
                     'created_at' => new Literal('NOW()'),
-                    'updated_at' => new Literal('NOW()'),
+                    'updated_at' => new Literal('NOW()')
                 ])->run();
             } catch(NeevoException $e){
                 Debugger::log($e);
