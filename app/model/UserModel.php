@@ -165,10 +165,10 @@ class UserModel{
                     'reputation_change_week' => $data['reputation_change_week'],
                     'creation_date' => DateTime::from($data['creation_date']),
                     'last_access_date' => DateTime::from($data['last_access_date']),
-                    'display_name' => $data['display_name'],
+                    'display_name' => html_entity_decode($data['display_name'], ENT_HTML5, 'UTF-8'),
                     'user_type' => $data['user_type'],
                     'website_url' => $data['website_url'] ?? null,
-                    'location' => $data['location'] ?? null,
+                    'location' => isset($data['location']) ? html_entity_decode($data['location'], ENT_HTML5, 'UTF-8') : null,
                     'is_employee' => (bool) $data['is_employee'],
                     'created_at' => new Literal('NOW()'),
                     'updated_at' => new Literal('NOW()')
