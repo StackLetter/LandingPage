@@ -222,7 +222,7 @@ class HomepagePresenter extends UI\Presenter{
         $form = $this->createComponentSignUpForm();
 
         unset($form['mail']);
-        $form['sites']->setRequired(false);
+        $form['site']->setRequired(false);
         $form['frequency']->setValue($this->session->account['frequency'] ?? null);
 
         return $form;
