@@ -147,6 +147,7 @@ class HomepagePresenter extends UI\Presenter{
             $this->model->scheduleWelcomeMail($account_id);
         } else{
             $account_id = $this->session->account['id'];
+            $this->model->updateAccount($account_id, ['frequency' => $values['frequency']]);
         }
         if(isset($values['site'])){
             $this->model->scheduleUsers($account_id, $values['site']);
@@ -218,7 +219,10 @@ class HomepagePresenter extends UI\Presenter{
 
     protected function createComponentManageForm(){
         $form = $this->createComponentSignUpForm();
+
         unset($form['mail']);
+        $form['frequency']->setValue($this->session->account['frequency'] ?? null);
+
         return $form;
     }
 

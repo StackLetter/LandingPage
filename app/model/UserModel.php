@@ -97,6 +97,12 @@ class UserModel{
     }
 
 
+    public function updateAccount($id, $values){
+        $values['updated_at'] = new Literal('NOW()');
+        return $this->db->update('accounts', $values)->where('id', $id)->run();
+    }
+
+
     public function retrieveUserSites($token){
         $sites = $this->fetchUserSites($token);
         return !empty($sites)
