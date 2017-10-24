@@ -177,7 +177,10 @@ class UserModel{
             try{
 
                 if($this->db->select('users')->where('external_id', $data['user_id'])->fetch()){
-                    $this->db->update('users', ['account_id' => $account_id])
+                    $this->db->update('users', [
+                        'account_id' => $account_id,
+                        'updated_at' => new Literal('NOW()')
+                    ])
                         ->where('external_id', $data['external_id'])
                         ->run();
                     continue;
