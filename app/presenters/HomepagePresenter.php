@@ -137,20 +137,29 @@ class HomepagePresenter extends UI\Presenter{
         $values = (array) $form->values;
 
         // Check for existing e-mail
-        if($this->model->getByEmail($values['mail']) !== false){
+        if(isset($values['mail']) && $this->model->getByEmail($values['mail']) !== false){
             $form->addError('The e-mail you entered is already in use.');
             return;
         }
 
-        $account_id = $this->model->createAccount($values['mail'], $this->session->access_token, $values['frequency']);
+        if(isset($values['mail'])){
+            $account_id = $this->model->createAccount($values['mail'], $this->session->access_token, $values['frequency']);
+            $this->model->scheduleWelcomeMail($account_id);
+        } else{
+            $account_id = $this->session->account['id'];
+        }
         if(isset($values['site'])){
             $this->model->scheduleUsers($account_id, $values['site']);
         }
-        $this->model->scheduleWelcomeMail($account_id);
 
-        $this->flashMessage('Thank you for signing up!', 'success');
-        $this->session->account = $this->model->getByToken($this->session->access_token)->toArray();
-        $this->redirect('default#signup');
+        if(isset($values['mail'])){
+            $this->flashMessage('Thank you for signing up!', 'success');
+            $this->session->account = $this->model->getByToken($this->session->access_token)->toArray();
+            $this->redirect('default#signup');
+        } else{
+            $this->flashMessage('Subscriptions updated.', 'success');
+            $this->redirect('this');
+        }
     }
 
 
@@ -204,6 +213,13 @@ class HomepagePresenter extends UI\Presenter{
             ];
         }
         $this->template->subscribed = $subscribed;
+    }
+
+
+    protected function createComponentManageForm(){
+        $form = $this->createComponentSignUpForm();
+        unset($form['mail']);
+        return $form;
     }
 
 }
