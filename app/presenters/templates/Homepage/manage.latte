@@ -1,39 +1,33 @@
-{block title}Sign up{/block}
 {block content}
 
 <div class="white-block">
     <div class="container">
-        <h1 class="sec-title" id="signup">Sign up for StackLetter</h1>
+        <h1 class="sec-title" id="signup" n:block="title">Manage subscriptions</h1>
         <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <p class="lead text-center">
-                  StackLetter will work as standard StackExchange newsletter. After signing up, you will choose from available StackExchange platforms for sending personalized newsletter.
-                </p>
-                <br>
+            <div class="col-md-6 col-md-offset-3">
+                <h2>Current subscriptions</h2>
+                <table class="table table-striped">
+                    <thead><tr><th>Site</th><th>Actions</th></thead>
+                    <tbody>
+                        <tr n:foreach="$subscribed as $sub">
+                            <th>{$sub['name']}</th>
+                            <td><a href="{$sub['unsubscribe']}">Unsubscribe</a></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <ol class="signup-steps">
-            <li class="done">Authorize</li>
-            <li class="done">Select sites</li>
-            <li>Done!</li>
-        </ol>
 
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
+                <h2>Subscribe for more</h2>
                 <form n:name="signUpForm" class="form-vertical signup-form">
                     <div class="alert alert-danger" n:if="$form->hasErrors()">
                         <p n:foreach="$form->errors as $error">{$error}</p>
                     </div>
                     <div class="alert alert-info" n:if="!isset($form['site'])">
                         We currently do not support any of the Stack Exchange sites you are signed up for.
-                        Leave us your e-mail and we will update you when we add support for some of them.
-                    </div>
-                    <div class="form-group form-group-lg">
-                        <label n:name="mail" class="control-label">E-mail</label>
-                        <div class="tip-wrapper">
-                            <input n:name="mail" class="form-control">
-                        </div>
-                        <p class="input-detail">We will only use your address for delivering the newsletter. You can unsubscribe anytime.</p>
+                        We will update you when we add support for some of them.
                     </div>
                     <div class="form-group form-group-lg" n:ifset="$form['site']">
                         <label n:name="site" class="control-label">Stack Exchange sites</label>

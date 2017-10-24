@@ -60,9 +60,27 @@ class UserModel{
         return $this->db->select('accounts')->where('id', $id)->fetch();
     }
 
+    public function getByExternalId($external_id){
+        if($external_id === null){
+            return false;
+        }
+        return $this->db->select('accounts')->where('external_id', $external_id)->fetch();
+    }
+
+    public function getByToken($token){
+        return $this->db->select('accounts')->where('token', $token)->fetch();
+    }
+
 
     public function getToken($id){
         return $this->db->select('token', 'accounts')->where('id', $id)->fetchSingle();
+    }
+
+
+    public function getSubscribedSites($account){
+        return $this->db->select('s.name, users.id AS user_id', 'users')
+            ->leftJoin('sites s', 'users.site_id = s.id')
+            ->where('users.account_id = %i', $account->id);
     }
 
 
@@ -70,6 +88,7 @@ class UserModel{
         return $this->db->insert('accounts', [
             'email' => $mail,
             'token' => $token,
+            'external_id' => $this->fetchExternalId($token),
             'frequency' => $frequency,
             'created_at' => new Literal('NOW()'),
             'updated_at' => new Literal('NOW()'),
@@ -86,6 +105,17 @@ class UserModel{
                 ->where('name', $sites)
                 ->fetchPairs('api', 'name')
             : false;
+    }
+
+
+    public function fetchExternalId($token){
+        try{
+            $res = $this->http->get("/access-tokens/$token", ['query' => ['key' => $this->apiParams['key']]]);
+            $json = json_decode($res->getBody(), true);
+            return $json['items'][0]['account_id'] ?? null;
+        } catch(ClientException $e){
+            return null;
+        }
     }
 
 

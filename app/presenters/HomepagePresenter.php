@@ -2,6 +2,7 @@
 
 namespace App\Presenters;
 
+use App\Models\SubscriptionModel;
 use App\Models\UserModel;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
@@ -21,6 +22,12 @@ class HomepagePresenter extends UI\Presenter{
      * @inject
      */
     public $model;
+
+    /**
+     * @var SubscriptionModel
+     * @inject
+     */
+    public $subscriptionModel;
 
     /**
      * @var SessionSection
@@ -97,6 +104,13 @@ class HomepagePresenter extends UI\Presenter{
         if(!isset($this->session->access_token)){
             $this->redirect('default');
         }
+
+        $external_id = $this->model->fetchExternalId($this->session->access_token);
+        $account = $this->model->getByExternalId($external_id);
+        if($account){
+            $this->session->account = $account->toArray();
+            $this->redirect('manage');
+        }
     }
 
 
@@ -134,8 +148,8 @@ class HomepagePresenter extends UI\Presenter{
         $this->model->scheduleWelcomeMail($account_id);
 
         $this->flashMessage('Thank you for signing up!', 'success');
-        $this->session->registered = true;
-        $this->redirect('default#signup');
+        $this->session->account = $this->model->getByToken($this->session->access_token)->toArray();
+        $this->redirect('manage');
     }
 
 
@@ -169,6 +183,26 @@ class HomepagePresenter extends UI\Presenter{
 
         $this->flashMessage('Thank you for your message. We\'ll get back to you as soon as possible.', 'success');
         $this->redirect('this#contact');
+    }
+
+
+    public function actionManage(){
+        if(!isset($this->session->account)){
+            $this->redirect('default');
+        }
+
+        $sites = $this->model->getSubscribedSites($this->session->account);
+        $subscribed = [];
+        foreach($sites as $site){
+            $subscribed[] = [
+                'name' => $site->name,
+                'unsubscribe' => $this->link('//Subscription:unsubscribe', [
+                    'id' => $site->user_id,
+                    'code' => $this->subscriptionModel->getUnsubscribeCode($site->user_id)
+                ])
+            ];
+        }
+        $this->template->subscribed = $subscribed;
     }
 
 }
