@@ -77,13 +77,10 @@ class UserModel{
     }
 
 
-    public function getSubscribedSites($account){
-        if(!isset($account->id)){
-            return [];
-        }
+    public function getSubscribedSites($account_id){
         return $this->db->select('s.name, users.id AS user_id', 'users')
             ->leftJoin('sites s', 'users.site_id = s.id')
-            ->where('users.account_id = %i', $account->id);
+            ->where('users.account_id = %i', $account_id);
     }
 
 

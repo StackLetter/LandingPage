@@ -10,6 +10,7 @@ use Nette\Application\UI;
 use Nette\Http\SessionSection;
 use Nette\Http\Url;
 use Nette\Mail;
+use Tracy\Debugger;
 
 
 /**
@@ -187,11 +188,12 @@ class HomepagePresenter extends UI\Presenter{
 
 
     public function actionManage(){
+        Debugger::barDump($this->session);
         if(!isset($this->session->account)){
             $this->redirect('default');
         }
 
-        $sites = $this->model->getSubscribedSites($this->session->account);
+        $sites = $this->model->getSubscribedSites($this->session->account->id);
         $subscribed = [];
         foreach($sites as $site){
             $subscribed[] = [
