@@ -149,7 +149,7 @@ class HomepagePresenter extends UI\Presenter{
 
         $this->flashMessage('Thank you for signing up!', 'success');
         $this->session->account = $this->model->getByToken($this->session->access_token)->toArray();
-        $this->redirect('manage');
+        $this->redirect('default#signup');
     }
 
 

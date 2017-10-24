@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <h2>Current subscriptions</h2>
-                <table class="table table-striped">
+                <table class="table table-striped" n:if="!empty($subscribed)">
                     <thead><tr><th>Site</th><th>Actions</th></thead>
                     <tbody>
                         <tr n:foreach="$subscribed as $sub">
@@ -15,6 +15,7 @@
                         </tr>
                     </tbody>
                 </table>
+                <p n:if="empty($subscribed)" class="text-center">You don't have any subscriptions yet.</p>
             </div>
         </div>
 
