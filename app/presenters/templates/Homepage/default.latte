@@ -63,8 +63,8 @@
         </div>
         <ol class="signup-steps">
             <li class="done">Authorize</li>
-            <li n:class="isset($presenter->session->registered) ? done">Select sites</li>
-            <li n:class="isset($presenter->session->registered) ? done">Done!</li>
+            <li n:class="isset($presenter->session->account) ? done">Select sites</li>
+            <li n:class="isset($presenter->session->account) ? done">Done!</li>
         </ol>
 
         <p class="text-center lead" n:ifset="$presenter->session->account">
