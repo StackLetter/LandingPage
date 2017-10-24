@@ -148,6 +148,7 @@ class HomepagePresenter extends UI\Presenter{
         } else{
             $account_id = $this->session->account['id'];
             $this->model->updateAccount($account_id, ['frequency' => $values['frequency']]);
+            $this->session->account = $this->model->get($account_id)->toArray();
         }
         if(isset($values['site'])){
             $this->model->scheduleUsers($account_id, $values['site']);
