@@ -68,7 +68,7 @@
         </ol>
 
         <p class="text-center lead" n:ifset="$presenter->session->account">
-            <br><span class="fa fa-check-circle"></span> You're all done!
+            <br><span class="fa fa-check-circle"></span> You're all done! <a n:href="manage">Manage your subscriptions.</a>
         </p>
 
         <p class="text-center" n:if="!isset($presenter->session->account)">
