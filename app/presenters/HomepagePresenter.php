@@ -188,12 +188,11 @@ class HomepagePresenter extends UI\Presenter{
 
 
     public function actionManage(){
-        Debugger::barDump($this->session);
         if(!isset($this->session->account)){
             $this->redirect('default');
         }
 
-        $sites = $this->model->getSubscribedSites($this->session->account->id);
+        $sites = $this->model->getSubscribedSites($this->session->account['id']);
         $subscribed = [];
         foreach($sites as $site){
             $subscribed[] = [
