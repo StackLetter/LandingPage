@@ -6,7 +6,7 @@ define('APP_DIR', __DIR__);
 
 $configurator = new Nette\Configurator;
 
-$configurator->setDebugMode('147.175.184.24'); // enable for your remote IP
+$configurator->setDebugMode('147.175.149.71'); // enable for your remote IP
 $configurator->enableTracy(__DIR__ . '/log');
 
 $configurator->setTimeZone('UTC');
