@@ -173,6 +173,8 @@ class UserModel{
 
 
     public function createUsers($account_id, $sites, $token){
+        $site_ids = $this->db->select('api, id', 'sites')->fetchPairs('id', 'api');
+
         foreach($sites as $site){
             $data = $this->getSiteUser($site, $token);
             if(!$data){
@@ -182,20 +184,20 @@ class UserModel{
             $this->db->begin();
             try{
 
-                if($this->db->select('users')->where('external_id', $data['user_id'])->fetch()){
+                if($this->db->select('users')->where('external_id', $data['user_id'])->and('site_id', $site_ids[$site])->fetch()){
                     $this->db->update('users', [
                         'account_id' => $account_id,
                         'updated_at' => new Literal('NOW()')
                     ])
                         ->where('external_id', $data['external_id'])
+                        ->and('site_id', $site_ids[$site])
                         ->run();
                     continue;
                 }
-                $site_id = $this->db->select('id', 'sites')->where('api', $site)->fetchSingle();
                 $this->db->insert('users', [
                     'account_id' => $account_id,
                     'external_id' => $data['user_id'],
-                    'site_id' => $site_id,
+                    'site_id' => $site_ids[$site],
                     'age' => $data['age'] ?? null,
                     'reputation' => $data['reputation'],
                     'accept_rate' => $data['accept_rate'] ?? null,
