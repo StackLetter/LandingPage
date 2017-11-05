@@ -173,7 +173,7 @@ class UserModel{
 
 
     public function createUsers($account_id, $sites, $token){
-        $site_ids = $this->db->select('api, id', 'sites')->fetchPairs('id', 'api');
+        $site_ids = $this->db->select('api, id', 'sites')->fetchPairs('api', 'id');
 
         foreach($sites as $site){
             $data = $this->getSiteUser($site, $token);
@@ -189,9 +189,10 @@ class UserModel{
                         'account_id' => $account_id,
                         'updated_at' => new Literal('NOW()')
                     ])
-                        ->where('external_id', $data['external_id'])
+                        ->where('external_id', $data['user_id'])
                         ->and('site_id', $site_ids[$site])
                         ->run();
+                    $this->db->commit();
                     continue;
                 }
                 $this->db->insert('users', [
