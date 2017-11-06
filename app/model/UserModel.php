@@ -220,14 +220,33 @@ class UserModel{
                 Debugger::log($e);
                 $this->db->rollback();
             }
-            $this->queueSidekiqUserDownload($data['user_id'], $site_ids[$site]);
             $this->db->commit();
+            $this->queueSidekiqUserDownload($data['user_id'], $site_ids[$site]);
         }
     }
 
     private function queueSidekiqUserDownload($external_id, $site_id){
-        $sidekiq = new \SidekiqJob\Client($this->redis);
-        $sidekiq->push('UserDataParserJob', [$external_id, $site_id], true, 'new_user');
+        $job = [
+            "class" => "ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper",
+            "wrapped" => "UserDataParserJob",
+            "queue" => "new_user",
+            "args" => [[
+                "job_class" => "UserDataParserJob",
+                "job_id" => bin2hex(openssl_random_pseudo_bytes(12)),
+                "provider_job_id" => null,
+                "queue_name" => "new_user",
+                "priority" => null,
+                "arguments" => [$external_id, $site_id],
+                "executions" => 0,
+                "locale" => "en"
+            ]],
+            "retry" => true,
+            "jid" => bin2hex(openssl_random_pseudo_bytes(12)),
+            "created_at" => microtime(true),
+            "enqueued_at" => microtime(true),
+        ];
+        $this->redis->sadd('queues', 'new_user');
+        $this->redis->lpush('queue:new_user', json_encode($job));
     }
 
     private function getSiteUser($site, $token){

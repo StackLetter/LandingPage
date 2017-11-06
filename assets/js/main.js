@@ -13,4 +13,8 @@ $(function(){
             scrollTop: $($.attr(this, 'href')).offset().top - 60
         }, 500);
     });
+
+    setTimeout(function(){
+        $('.alert-wrapper > .alert').slideUp(500);
+    }, 7500);
 });

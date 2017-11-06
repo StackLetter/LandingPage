@@ -230,4 +230,11 @@ class HomepagePresenter extends UI\Presenter{
         return $form;
     }
 
+    public function actionLogout(){
+        unset($this->session->access_token);
+        unset($this->session->account);
+        $this->flashMessage('Logout successful.', 'success');
+        $this->redirect('default');
+    }
+
 }
