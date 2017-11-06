@@ -227,7 +227,7 @@ class UserModel{
 
     private function queueSidekiqUserDownload($external_id, $site_id){
         $sidekiq = new \SidekiqJob\Client($this->redis);
-        $sidekiq->push('UserDataParserJob', [$external_id, $site_id], false, 'new_user');
+        $sidekiq->push('UserDataParserJob', [$external_id, $site_id], true, 'new_user');
     }
 
     private function getSiteUser($site, $token){
