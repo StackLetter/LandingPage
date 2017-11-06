@@ -236,7 +236,7 @@ class UserModel{
                 "provider_job_id" => null,
                 "queue_name" => "new_user",
                 "priority" => null,
-                "arguments" => [$external_id, $site_id],
+                "arguments" => [(int) $external_id, (int) $site_id],
                 "executions" => 0,
                 "locale" => "en"
             ]],
