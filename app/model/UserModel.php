@@ -193,6 +193,7 @@ class UserModel{
                         ->and('site_id', $site_ids[$site])
                         ->run();
                     $this->db->commit();
+                    $this->queueSidekiqUserDownload($data['user_id'], $site_ids[$site]);
                     continue;
                 }
                 $this->db->insert('users', [
@@ -219,8 +220,14 @@ class UserModel{
                 Debugger::log($e);
                 $this->db->rollback();
             }
+            $this->queueSidekiqUserDownload($data['user_id'], $site_ids[$site]);
             $this->db->commit();
         }
+    }
+
+    private function queueSidekiqUserDownload($external_id, $site_id){
+        $sidekiq = new \SidekiqJob\Client($this->redis);
+        $sidekiq->push('UserDataParserJob', [$external_id, $site_id], false, 'new_user');
     }
 
     private function getSiteUser($site, $token){

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "70abc3cdfadb5b664d29c5f493a64018",
-    "content-hash": "7d9cf6ba38292641e9c177544378dc2d",
+    "hash": "452834457be7f808261024fe8d75d96f",
+    "content-hash": "1cec8c502e69fd6961c0739af516ecea",
     "packages": [
         {
             "name": "fluent/logger",
@@ -1812,6 +1812,60 @@
                 "nette"
             ],
             "time": "2016-01-22 00:10:55"
+        },
+        {
+            "name": "spinx/sidekiq-job-php",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spinx/sidekiq-job-php.git",
+                "reference": "2afe43d4b586469e25decedf70c145091c95b91e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spinx/sidekiq-job-php/zipball/2afe43d4b586469e25decedf70c145091c95b91e",
+                "reference": "2afe43d4b586469e25decedf70c145091c95b91e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4",
+                "predis/predis": "^1.0"
+            },
+            "require-dev": {
+                "ciaranmcnulty/phpspec-typehintedmethods": "^1.01",
+                "henrikbjorn/phpspec-code-coverage": "^1.0",
+                "knplabs/phpspec-welldone-extension": "dev-master",
+                "m6web/redis-mock": "^2.2",
+                "phpspec/nyan-formatters": "^1.0",
+                "phpspec/phpspec": "^2.2",
+                "symfony/var-dumper": "^2.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SidekiqJob\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Damjan Znidarsic",
+                    "email": "damjan@znidarsic.me"
+                }
+            ],
+            "description": "Push and schedule jobs to Sidekiq from PHP",
+            "keywords": [
+                "processing",
+                "queue",
+                "redis",
+                "resque",
+                "sidekiq",
+                "worker"
+            ],
+            "time": "2017-03-30 12:09:36"
         },
         {
             "name": "tracy/tracy",
