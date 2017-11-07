@@ -47,6 +47,8 @@ class SubscriptionPresenter extends UI\Presenter{
             return;
         }
 
+        $this->session->site = $result['site'];
+
         $this->template->mail = $result['mail'];
         $this->template->site = $result['site'];
         $this->template->resubscribeLink = $this->link('//resubscribe', [
@@ -118,7 +120,7 @@ class SubscriptionPresenter extends UI\Presenter{
         $message = sprintf(
             "Account ID: %s\nSite: %s\nReasons: %s\n\nText:\n%s\n",
             $this->session->account_id ?? 'unknown',
-            $this->template->site ?? 'unknown',
+            $this->session->site ?? 'unknown',
             join(', ', $values['reason']),
             $values['body']
         );
