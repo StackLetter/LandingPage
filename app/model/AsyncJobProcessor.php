@@ -66,11 +66,13 @@ class AsyncJobProcessor{
     public function processUserDownload($p){
         $account_id = $p['account_id'];
         $sites = $p['sites'];
-        $access_token = $this->userModel->getToken($account_id);
+        $access_token = $p['token'];
+        //$access_token = $this->userModel->getToken($account_id);
         if(!$access_token){
             return false;
         }
 
+        $this->log("Creating user: %s, sites: %s, token: %s", $account_id, join(',', $sites), $access_token);
         $this->userModel->createUsers($account_id, $sites, $access_token);
         return true;
     }

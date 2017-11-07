@@ -152,7 +152,7 @@ class HomepagePresenter extends UI\Presenter{
             $this->session->account = $this->model->get($account_id)->toArray();
         }
         if(isset($values['site'])){
-            $this->model->scheduleUsers($account_id, $values['site']);
+            $this->model->scheduleUsers($account_id, $values['site'], $this->session->access_token);
         }
 
         if(isset($values['mail'])){

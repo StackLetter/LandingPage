@@ -153,12 +153,13 @@ class UserModel{
     }
 
 
-    public function scheduleUsers($account_id, $sites){
+    public function scheduleUsers($account_id, $sites, $token){
         $this->redis->lpush($this->redisParams['job_queue'], json_encode([
             'job' => 'stackletter.user.download',
             'params' => [
                 'account_id' => $account_id,
-                'sites' => $sites
+                'sites' => $sites,
+                'token' => $token,
             ]
         ]));
     }
