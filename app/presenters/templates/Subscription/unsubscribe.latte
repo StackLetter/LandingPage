@@ -20,5 +20,27 @@
                 <br>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <h2><small>Why did you unsubscribe?</small></h2>
+                <form n:name="feedbackForm" class="form-vertical">
+                    <div class="alert alert-danger" n:if="$form->hasErrors()">
+                        <p n:foreach="$form->errors as $error">{$error}</p>
+                    </div>
+                    <div class="form-group">
+                        <div class="radiolist">
+                            {input reason}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label n:name="body" class="control-label">Other</label>
+                        <textarea n:name="body" cols="30" rows="5" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button n:name="send" class="btn btn-lg btn-primary btn-block">Send feedback</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>

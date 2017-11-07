@@ -5,6 +5,7 @@ namespace App\Presenters;
 use App\Models\SubscriptionModel;
 use Nette\Application\Responses\JsonResponse;
 use Nette\Application\UI;
+use Nette\Mail;
 
 
 class SubscriptionPresenter extends UI\Presenter{
@@ -88,6 +89,49 @@ class SubscriptionPresenter extends UI\Presenter{
             'status' => 'success',
             'link' => $link
         ]));
+    }
+
+
+    protected function createComponentFeedbackForm(){
+        $form = new UI\Form;
+
+        $form->addProtection();
+        $form->addCheckboxList('reason', 'Reason', [
+            'relevance' => 'The newsletter content is not relevant',
+            'expectation' => 'I expected more from the newsletter',
+            'stop' => 'I no longer wish to receive the newsletter',
+        ]);
+        $form->addTextArea('body', 'Other');
+        $form->addSubmit('send', 'Send');
+        $form->onSuccess[] = [$this, 'feedbackFormSubmitted'];
+
+        return $form;
+    }
+
+    public function feedbackFormSubmitted(UI\Form $form){
+        $values = (array) $form->values;
+
+        $message = sprintf(
+            "Account ID: %s\nSite: %s\nReasons: %s\n\nText:\n%s\n",
+            $this->session->account_id ?? 'unknown',
+            $this->template->site ?? 'unknown',
+            join(', ', $values['reason']),
+            $values['body']
+        );
+
+        $mail = new Mail\Message;
+        $mail->setFrom('info@stackletter.com')
+             ->setSubject('[StackLetter] Unsubscribe feedback')
+             ->setBody($message)
+             ->setHeader('X-Mailer', 'StackLetter');
+        foreach($this->context->getParameters()['mail']['receivers'] as $addr){
+            $mail->addTo($addr);
+        }
+
+        $this->context->getByType(Mail\IMailer::class)->send($mail);
+
+        $this->flashMessage('Thank you for your feedback.', 'success');
+        $this->redirect('Homepage:default');
     }
 
 }
