@@ -4,62 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "452834457be7f808261024fe8d75d96f",
-    "content-hash": "1cec8c502e69fd6961c0739af516ecea",
+    "hash": "70abc3cdfadb5b664d29c5f493a64018",
+    "content-hash": "7d9cf6ba38292641e9c177544378dc2d",
     "packages": [
-        {
-            "name": "fluent/logger",
-            "version": "v1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fluent/fluent-logger-php.git",
-                "reference": "c5a19ba8eb5e15f9ade72afeffba6b6e7eb51155"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fluent/fluent-logger-php/zipball/c5a19ba8eb5e15f9ade72afeffba6b6e7eb51155",
-                "reference": "c5a19ba8eb5e15f9ade72afeffba6b6e7eb51155",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.3",
-                "phpunit/phpunit-mock-objects": "2.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Fluent\\Logger\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache"
-            ],
-            "authors": [
-                {
-                    "name": "Shuhei Tanuma",
-                    "email": "chobieee@gmail.com"
-                },
-                {
-                    "name": "Sotaro Karasawa",
-                    "email": "sotarok@crocos.co.jp"
-                },
-                {
-                    "name": "DQNEO",
-                    "email": "dqneoo@gmail.com"
-                }
-            ],
-            "description": "a logging library for Fluentd",
-            "homepage": "http://github.com/fluent/fluent-logger-php",
-            "keywords": [
-                "log",
-                "logging"
-            ],
-            "time": "2017-02-15 07:14:53"
-        },
         {
             "name": "guzzlehttp/guzzle",
             "version": "6.3.0",
@@ -1662,21 +1609,20 @@
         },
         {
             "name": "rollbar/rollbar",
-            "version": "v1.3.2",
+            "version": "v1.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rollbar/rollbar-php.git",
-                "reference": "e45f3ad83ea20c899efdd4f91d774e087ec5b4cc"
+                "reference": "2e092656f49b5bd52eb5ee381b5eece58d82e30e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rollbar/rollbar-php/zipball/e45f3ad83ea20c899efdd4f91d774e087ec5b4cc",
-                "reference": "e45f3ad83ea20c899efdd4f91d774e087ec5b4cc",
+                "url": "https://api.github.com/repos/rollbar/rollbar-php/zipball/2e092656f49b5bd52eb5ee381b5eece58d82e30e",
+                "reference": "2e092656f49b5bd52eb5ee381b5eece58d82e30e",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
-                "fluent/logger": "^1.0",
                 "psr/log": "~1.0.2"
             },
             "require-dev": {
@@ -1718,7 +1664,7 @@
                 "logging",
                 "monitoring"
             ],
-            "time": "2017-09-20 22:44:48"
+            "time": "2017-10-27 17:40:44"
         },
         {
             "name": "smasty/neevo",
@@ -1770,22 +1716,24 @@
         },
         {
             "name": "smasty/neevo-nette-ext",
-            "version": "v1.2.3",
+            "version": "v1.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smasty/neevo-nette-ext.git",
-                "reference": "9309b2ea6a3829db74d66b6269d88fa9d9af3a99"
+                "reference": "bc06c866a4fd29b87ba28efb5673d108d70b8e3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smasty/neevo-nette-ext/zipball/9309b2ea6a3829db74d66b6269d88fa9d9af3a99",
-                "reference": "9309b2ea6a3829db74d66b6269d88fa9d9af3a99",
+                "url": "https://api.github.com/repos/smasty/neevo-nette-ext/zipball/bc06c866a4fd29b87ba28efb5673d108d70b8e3f",
+                "reference": "bc06c866a4fd29b87ba28efb5673d108d70b8e3f",
                 "shasum": ""
             },
             "require": {
-                "nette/application": "~2.3",
+                "nette/caching": "~2.3",
+                "nette/di": "~2.3",
                 "php": ">=5.3.0",
-                "smasty/neevo": ">=2.3.1"
+                "smasty/neevo": ">=2.3.1",
+                "tracy/tracy": "~2.3"
             },
             "type": "library",
             "autoload": {
@@ -1811,74 +1759,20 @@
                 "neevo",
                 "nette"
             ],
-            "time": "2016-01-22 00:10:55"
-        },
-        {
-            "name": "spinx/sidekiq-job-php",
-            "version": "0.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spinx/sidekiq-job-php.git",
-                "reference": "2afe43d4b586469e25decedf70c145091c95b91e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spinx/sidekiq-job-php/zipball/2afe43d4b586469e25decedf70c145091c95b91e",
-                "reference": "2afe43d4b586469e25decedf70c145091c95b91e",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4",
-                "predis/predis": "^1.0"
-            },
-            "require-dev": {
-                "ciaranmcnulty/phpspec-typehintedmethods": "^1.01",
-                "henrikbjorn/phpspec-code-coverage": "^1.0",
-                "knplabs/phpspec-welldone-extension": "dev-master",
-                "m6web/redis-mock": "^2.2",
-                "phpspec/nyan-formatters": "^1.0",
-                "phpspec/phpspec": "^2.2",
-                "symfony/var-dumper": "^2.7"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "SidekiqJob\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Damjan Znidarsic",
-                    "email": "damjan@znidarsic.me"
-                }
-            ],
-            "description": "Push and schedule jobs to Sidekiq from PHP",
-            "keywords": [
-                "processing",
-                "queue",
-                "redis",
-                "resque",
-                "sidekiq",
-                "worker"
-            ],
-            "time": "2017-03-30 12:09:36"
+            "time": "2017-10-23 14:11:32"
         },
         {
             "name": "tracy/tracy",
-            "version": "v2.4.9",
+            "version": "v2.4.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tracy.git",
-                "reference": "efe45da0aa3a50ce5356be39f2168d7925d94f3d"
+                "reference": "5b302790edd71924dfe4ec44f499ef61df3f53a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tracy/zipball/efe45da0aa3a50ce5356be39f2168d7925d94f3d",
-                "reference": "efe45da0aa3a50ce5356be39f2168d7925d94f3d",
+                "url": "https://api.github.com/repos/nette/tracy/zipball/5b302790edd71924dfe4ec44f499ef61df3f53a2",
+                "reference": "5b302790edd71924dfe4ec44f499ef61df3f53a2",
                 "shasum": ""
             },
             "require": {
@@ -1932,7 +1826,7 @@
                 "nette",
                 "profiler"
             ],
-            "time": "2017-08-16 17:13:36"
+            "time": "2017-10-04 18:43:42"
         }
     ],
     "packages-dev": [
