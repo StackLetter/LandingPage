@@ -6,6 +6,7 @@ use App\Models\SubscriptionModel;
 use Nette\Application\Responses\JsonResponse;
 use Nette\Application\UI;
 use Nette\Mail;
+use Tracy\Debugger;
 
 
 class SubscriptionPresenter extends UI\Presenter{
@@ -29,6 +30,9 @@ class SubscriptionPresenter extends UI\Presenter{
 
 
     public function actionUnsubscribe($id){
+        if($this->request->getMethod() == 'POST'){
+            return;
+        }
         $code = $this->getParameter('code');
         $this->template->manage = $this->getParameter('manage');
 
