@@ -27,6 +27,7 @@ class SubscriptionPresenter extends UI\Presenter{
 
         $this->template->mail = $result['mail'];
         $this->template->site = $result['site'];
+        $this->template->manage = $this->getParameter('manage');
     }
 
 

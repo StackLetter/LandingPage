@@ -8,8 +8,11 @@
             <div class="col-md-10 col-md-offset-1">
                 <p class="lead text-center text-success"><i class="fa fa-check-circle"></i></p>
                 <p class="lead text-center">
-                  Your e-mail address (<strong class="lite">{$mail}</strong>) has been successfuly<br>
-                  unsubscribed from the <strong class="lite">StackLetter {$site}</strong> newsletter.
+                    Your e-mail address (<strong class="lite">{$mail}</strong>) has been successfuly<br>
+                    unsubscribed from the <strong class="lite">StackLetter {$site}</strong> newsletter.
+                </p>
+                <p n:if="$manage !== null">
+                    <a n:href="Homepage:manage">Go back</a> to subscription management.
                 </p>
                 <br>
             </div>

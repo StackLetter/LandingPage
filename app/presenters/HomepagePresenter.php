@@ -160,6 +160,7 @@ class HomepagePresenter extends UI\Presenter{
             $this->redirect('default#signup');
         } else{
             $this->flashMessage('Subscriptions updated.', 'success');
+            sleep(3); // wait a bit for async job
             $this->redirect('this');
         }
     }
@@ -210,7 +211,8 @@ class HomepagePresenter extends UI\Presenter{
                 'name' => $site->name,
                 'unsubscribe' => $this->link('//Subscription:unsubscribe', [
                     'id' => $site->user_id,
-                    'code' => $this->subscriptionModel->getUnsubscribeCode($site->user_id)
+                    'code' => $this->subscriptionModel->getUnsubscribeCode($site->user_id),
+                    'manage' => true
                 ])
             ];
         }

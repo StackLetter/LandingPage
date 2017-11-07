@@ -11,12 +11,12 @@
                     <tbody>
                         <tr n:foreach="$subscribed as $sub">
                             <td>{$sub['name']}</td>
-                            <td><a href="{$sub['unsubscribe']}">Unsubscribe</a></td>
+                            <td><a href="{$sub['unsubscribe']}" onclick="return confirm('Are you sure you want to unsubscribe?')">Unsubscribe</a></td>
                         </tr>
                     </tbody>
                 </table>
                 <p n:if="empty($subscribed)" class="text-center">You don't have any subscriptions yet.<br>
-                (It might take a moment to update your subscription settings. Try <a n:href="this">reloading</a> the page.)</p>
+                <small>(It might take a moment to update your subscription settings. Try <a n:href="this">reloading</a> the page.)</small></p>
             </div>
         </div>
 
