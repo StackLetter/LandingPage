@@ -51,6 +51,8 @@ class SubscriptionModel{
 
         if($code !== $this->generateCode($id, $account['email'])){
             Debugger::barDump("Code mismatch");
+            Debugger::barDump($id, 'id');
+            Debugger::barDump($account['email'], 'mail');
             Debugger::barDump($code, 'provided code');
             Debugger::barDump($this->generateCode($id, $account['email']), 'generated code');
             return false;
