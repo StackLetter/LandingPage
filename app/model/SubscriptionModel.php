@@ -24,7 +24,7 @@ class SubscriptionModel{
         return $this->db->select('accounts.*', 'users')
             ->leftJoin('accounts', ':accounts.id = :users.account_id')
             ->where(':users.id = %i', $user_id)
-            ->where(':users.account_id IS NOT NULL')
+            ->where('users.account_id IS NOT NULL')
             ->fetch();
     }
 
