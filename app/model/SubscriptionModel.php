@@ -45,15 +45,20 @@ class SubscriptionModel{
     public function updateSubscription($id, $code, $resubscribe = false){
         $account = $this->getAccount($id, $resubscribe);
         if(!$account){
+            Debugger::barDump('No account');
             return false;
         }
 
         if($code !== $this->generateCode($id, $account['email'])){
+            Debugger::barDump("Code mismatch");
+            Debugger::barDump($code, 'provided code');
+            Debugger::barDump($this->generateCode($id, $account['email']), 'generated code');
             return false;
         }
 
         $query = $this->db->update('users', ['account_id' => $resubscribe ? $account['id'] : NULL])->where('id', $id)->run();
         if(!$query){
+            Debugger::barDump("Query UDPATE failed");
             return false;
         }
 
