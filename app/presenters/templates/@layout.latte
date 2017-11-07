@@ -21,6 +21,9 @@
             </div>
 
             <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right logout" n:ifset="$presenter->session->account">
+                    <li><a n:href="Homepage:logout">Logout</a></li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{if $presenter->action != 'default'}{$basePath}/{/if}#about">About</a></li>
                     <li><a href="{if $presenter->action != 'default'}{$basePath}/{/if}#signup">Sign up</a></li>

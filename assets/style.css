@@ -6,6 +6,7 @@ strong.lite{font-weight:500}
 .navbar-custom a.navbar-brand{font-size: 24px;color:#fff;}
 .navbar-custom .navbar-nav a{color:#fff}
 .navbar-custom .navbar-nav a:hover, .navbar-custom .navbar-nav a:focus{color:#fff;background:rgba(255,255,255,.1);border-radius:5px}
+.nav.logout{border-left:1px solid rgba(255,255,255,.1);padding-left:10px;margin-left: 10px;}
 
 .alert-wrapper{position:fixed;top:70px;left: 0;right: 0;z-index:10000}
 .alert-wrapper .alert{max-width:900px;margin:0 auto;}
