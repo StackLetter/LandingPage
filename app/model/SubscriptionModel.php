@@ -20,13 +20,11 @@ class SubscriptionModel{
         $this->config = $config;
     }
 
-    private function getAccount($user_id, $resubscribe = false){
+    public function getAccount($user_id){
         return $this->db->select('accounts.*', 'users')
             ->leftJoin('accounts', ':accounts.id = :users.account_id')
             ->where(':users.id = %i', $user_id)
-            ->if(!$resubscribe)
-                ->where('users.account_id IS NOT NULL')
-            ->end()
+            ->where('users.account_id IS NOT NULL')
             ->fetch();
     }
 
@@ -42,25 +40,40 @@ class SubscriptionModel{
     }
 
 
-    public function updateSubscription($id, $code, $resubscribe = false){
-        $account = $this->getAccount($id, $resubscribe);
+    public function unsubscribe($id, $code){
+        $account = $this->getAccount($id);
         if(!$account){
-            Debugger::barDump('No account');
             return false;
         }
 
         if($code !== $this->generateCode($id, $account['email'])){
-            Debugger::barDump("Code mismatch");
-            Debugger::barDump($id, 'id');
-            Debugger::barDump($account['email'], 'mail');
-            Debugger::barDump($code, 'provided code');
-            Debugger::barDump($this->generateCode($id, $account['email']), 'generated code');
             return false;
         }
 
-        $query = $this->db->update('users', ['account_id' => $resubscribe ? $account['id'] : NULL])->where('id', $id)->run();
+        $query = $this->db->update('users', ['account_id' => NULL])->where('id', $id)->run();
         if(!$query){
-            Debugger::barDump("Query UDPATE failed");
+            return false;
+        }
+
+        return [
+            'mail' => $account['email'],
+            'site' => $this->getUserSite($id),
+        ];
+    }
+
+
+    public function resubscribe($id, $account_id, $code){
+        $account = $this->db->select('accounts')->where('id', $account_id)->fetch();
+        if(!$account){
+            return false;
+        }
+
+        if($code !== $this->generateCode($id, $account['email'])){
+            return false;
+        }
+
+        $query = $this->db->update('users', ['account_id' => NULL])->where('id', $id)->run();
+        if(!$query){
             return false;
         }
 

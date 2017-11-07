@@ -15,12 +15,28 @@ class SubscriptionPresenter extends UI\Presenter{
      */
     public $model;
 
+    /**
+     * @var SessionSection
+     */
+    public $session;
+
+    public function startup(){
+        parent::startup();
+        $this->session = $this->getSession()->getSection(static::class);
+        $this->session->getIterator(); // force start()
+    }
+
 
     public function actionUnsubscribe($id){
         $code = $this->getParameter('code');
         $this->template->manage = $this->getParameter('manage');
 
-        $result = $this->model->updateSubscription($id, $code);
+        $account = $this->model->getAccount($id);
+        if($account){
+            $this->session->account_id = $account['id'];
+        }
+
+        $result = $this->model->unsubscribe($id, $code);
         if(!$result){
             $this->redirect('unsubscribeerror');
             return;
@@ -40,7 +56,7 @@ class SubscriptionPresenter extends UI\Presenter{
         $code = $this->getParameter('code');
         $this->template->manage = $this->getParameter('manage');
 
-        $result = $this->model->updateSubscription($id, $code, true);
+        $result = $this->model->resubscribe($id, $this->session->account_id, $code);
         if(!$result){
             $this->redirect('resubscribeerror');
             return;
