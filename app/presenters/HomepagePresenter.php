@@ -38,6 +38,7 @@ class HomepagePresenter extends UI\Presenter{
     public function startup(){
         parent::startup();
         $this->session = $this->getSession()->getSection(static::class);
+        $this->session->getIterator(); // force start()
     }
 
     public function getConfig(){
@@ -119,8 +120,6 @@ class HomepagePresenter extends UI\Presenter{
         $form = new UI\Form;
 
         $sites = $this->model->retrieveUserSites($this->session->access_token);
-        Debugger::log($sites);
-        Debugger::log($this->session->access_token);
 
         $form->addEmail('mail', 'E-mail')->setRequired();
 
