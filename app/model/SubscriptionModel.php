@@ -20,11 +20,13 @@ class SubscriptionModel{
         $this->config = $config;
     }
 
-    private function getAccount($user_id){
+    private function getAccount($user_id, $resubscribe){
         return $this->db->select('accounts.*', 'users')
             ->leftJoin('accounts', ':accounts.id = :users.account_id')
             ->where(':users.id = %i', $user_id)
-            ->where('users.account_id IS NOT NULL')
+            ->if($resubscribe)
+                ->where('users.account_id IS NOT NULL')
+            ->end()
             ->fetch();
     }
 
@@ -41,7 +43,7 @@ class SubscriptionModel{
 
 
     public function updateSubscription($id, $code, $resubscribe = false){
-        $account = $this->getAccount($id);
+        $account = $this->getAccount($id, $resubscribe);
         if(!$account){
             return false;
         }
