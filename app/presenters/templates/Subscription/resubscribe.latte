@@ -1,21 +1,18 @@
-{block title}Unsubscribe{/block}
+{block title}Subscribe{/block}
 {block content}
 
 <div class="white-block">
     <div class="container">
-        <h1 class="sec-title">Unsubscribe successful</h1>
+        <h1 class="sec-title">Resubscribe successful</h1>
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <p class="lead text-center text-success"><i class="fa fa-check-circle"></i></p>
                 <p class="lead text-center">
                     Your e-mail address (<strong class="lite">{$mail}</strong>) has been successfuly<br>
-                    unsubscribed from the <strong class="lite">StackLetter {$site}</strong> newsletter.
+                    subscribed to the <strong class="lite">StackLetter {$site}</strong> newsletter.
                 </p>
                 <p n:if="$manage !== null" class="text-center">
                     <a n:href="Homepage:manage">Go back</a> to subscription management.
-                </p>
-                <p class="text-center">
-                    <small>Clicked the link accidentally? <a href="{$resubscribeLink}">Subscribe back</a> to the newsletter.</small>
                 </p>
                 <br>
             </div>

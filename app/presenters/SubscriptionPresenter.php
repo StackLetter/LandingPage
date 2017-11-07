@@ -18,8 +18,9 @@ class SubscriptionPresenter extends UI\Presenter{
 
     public function actionUnsubscribe($id){
         $code = $this->getParameter('code');
+        $this->template->manage = $this->getParameter('manage');
 
-        $result = $this->model->unsubscribe($id, $code);
+        $result = $this->model->updateSubscription($id, $code);
         if(!$result){
             $this->redirect('unsubscribeerror');
             return;
@@ -27,7 +28,26 @@ class SubscriptionPresenter extends UI\Presenter{
 
         $this->template->mail = $result['mail'];
         $this->template->site = $result['site'];
+        $this->template->resubscribeLink = $this->link('//resubscribe', [
+            'id' => $id,
+            'code' => $code,
+            'manage' => $this->getParameter('manage'),
+        ]);
+    }
+
+
+    public function actionResubscribe($id){
+        $code = $this->getParameter('code');
         $this->template->manage = $this->getParameter('manage');
+
+        $result = $this->model->updateSubscription($id, $code, true);
+        if(!$result){
+            $this->redirect('resubscribeerror');
+            return;
+        }
+
+        $this->template->mail = $result['mail'];
+        $this->template->site = $result['site'];
     }
 
 

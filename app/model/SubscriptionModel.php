@@ -24,7 +24,7 @@ class SubscriptionModel{
         return $this->db->select('accounts.*', 'users')
             ->leftJoin('accounts', ':accounts.id = :users.account_id')
             ->where(':users.id = %i', $user_id)
-            ->where(':users.account_id != %i', NULL)
+            ->where(':users.account_id IS NOT NULL')
             ->fetch();
     }
 
@@ -40,7 +40,7 @@ class SubscriptionModel{
     }
 
 
-    public function unsubscribe($id, $code){
+    public function updateSubscription($id, $code, $resubscribe = false){
         $account = $this->getAccount($id);
         if(!$account){
             return false;
@@ -50,7 +50,7 @@ class SubscriptionModel{
             return false;
         }
 
-        $query = $this->db->update('users', ['account_id' => NULL])->where('id', $id)->run();
+        $query = $this->db->update('users', ['account_id' => $resubscribe ? $account['id'] : NULL])->where('id', $id)->run();
         if(!$query){
             return false;
         }
