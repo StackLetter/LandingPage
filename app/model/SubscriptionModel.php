@@ -72,7 +72,7 @@ class SubscriptionModel{
             return false;
         }
 
-        $query = $this->db->update('users', ['account_id' => NULL])->where('id', $id)->run();
+        $query = $this->db->update('users', ['account_id' => $account_id)->where('id', $id)->run();
         if(!$query){
             return false;
         }
