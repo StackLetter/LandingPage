@@ -109,6 +109,7 @@ class UserModel{
             ? $this->db->select('sites')
                 ->where('enabled', true)
                 ->where('name', $sites)
+                ->where('id != %i', 1)
                 ->fetchPairs('api', 'name')
             : false;
     }
