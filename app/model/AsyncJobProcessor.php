@@ -84,6 +84,8 @@ class AsyncJobProcessor{
             return false;
         }
 
+        $this->log("Sending mail: %s\n", $account->email);
+
         $latte = new Engine;
 
         $baseDir = APP_DIR . '/mail';
@@ -102,7 +104,7 @@ class AsyncJobProcessor{
     private function log($msg){
         $s = call_user_func_array('sprintf', func_get_args());
         echo $s;
-        $filename = __DIR__ . '/../log/async.log';
+        $filename = APP_DIR . '/log/async.log';
         file_put_contents($filename, date('Y-m-d H:i:s ') . $s, FILE_APPEND);
     }
 
