@@ -102,6 +102,8 @@ class AsyncJobProcessor{
     private function log($msg){
         $s = call_user_func_array('sprintf', func_get_args());
         echo $s;
+        $filename = __DIR__ . '/../log/async.log';
+        file_put_contents($filename, date('Y-m-d H:i:s ') . $s, FILE_APPEND);
     }
 
 }
